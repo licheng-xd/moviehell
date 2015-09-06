@@ -20,13 +20,15 @@ public class SpiderTask {
     @Resource
     private MovieServiceImpl movieService;
 
-    @Scheduled(cron = "0 0 */1 * * ?")
+    @Scheduled(cron = "0 */10 * * * ?")
     public void run() {
-        logger.info("start spider movieService:{}", movieService == null);
+        logger.info("start movie spider ...");
         Spider.create(new MovieSpider(movieService))
             .addUrl("http://dytt8.net/")
             .addPipeline(new MoviePipeline(movieService))
             .thread(1)
             .run();
     }
+
+
 }

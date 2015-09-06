@@ -15,4 +15,6 @@ public interface MovieMapper {
     List<Movie> getMoviesByOffset(int offset);
 
     int getMovieCount();
+
+    List<Movie> searchMovie(String key);
 }

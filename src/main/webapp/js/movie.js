@@ -19,7 +19,7 @@ function gotoPage(offset) {
         beforeSend: function(XMLHttpRequest){
         },
         success: function(data, textStatus){
-            console.log(data);
+            //console.log(data);
             var list = document.getElementById("movie_list");
             list.innerHTML = "<a class=\"list-group-item active\">最近更新</a>";
             var resp = eval("(" + data + ")");
@@ -44,7 +44,7 @@ function gotoPage(offset) {
     if (pageCount > 0) {
         var start = pageOffset - 2;
         if (start < 0) start = 0;
-        var end = offset + 3;
+        var end = start + 5;
         if (end > pageCount) end = pageCount;
         var pages = document.getElementById("pages");
         pages.innerHTML = "<li><a onclick=\"gotoPage(" + (pageOffset - 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
@@ -66,7 +66,7 @@ function getPageCount() {
         beforeSend: function(XMLHttpRequest){
         },
         success: function(data, textStatus){
-            console.log(data);
+            //console.log(data);
             var resp = eval("(" + data + ")");
             if (resp["code"] == 200) {
                 pageCount = resp["obj"];
@@ -83,7 +83,24 @@ function getPageCount() {
 
 function get_movie(id) {
     console.log("movie: " + id);
-    window.open("movie/" + id);
+    window.open("/movie/" + id);
+}
+
+function searchMovie() {
+    var key = document.getElementById("search_key").value;
+    if (key.length == 0) {
+        return;
+    }
+    key = BASE64.encoder(key);
+    window.location.replace("/search/" + key);
+}
+
+function searchInput() {
+    if (event.keyCode == 13) {
+        event.keyCode = 0;//屏蔽回车键
+        event.returnvalue = false;
+        searchMovie();
+    }
 }
 
 function setCookie(name,value)//两个参数，一个是cookie的名子，一个是值

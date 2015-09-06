@@ -26,13 +26,23 @@
   <!-- Custom styles for this template -->
   <link rel="stylesheet" href="../css/jumbotron-narrow.css">
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="js/movie.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66789738-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
 </head>
 
 <body>
 
-<div class="container">
+<div class="container" id="container">
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
@@ -40,18 +50,55 @@
         <li role="presentation"><a href="/about.html">About</a></li>
       </ul>
     </nav>
-    <h3 class="text-muted">About Movie Hell</h3>
+    <h3 class="text-muted">Movie Hell</h3>
   </div>
 
-  <h1>404</h1>
+  <h1 align="center">404</h1>
+
+  <div align="center">
+    <canvas id="q" height="350">...</canvas><br/><br/>
+  </div>
 
   <footer class="footer">
     <p>&copy; LC 2015</p>
   </footer>
 
 </div> <!-- /container -->
+<script>
+  $(document).ready(function(){
+    var s=window.screen;
+    var ml = document.getElementById("container");
+    var width = q.width = ml.offsetWidth;
+    var height = q.height;
+    var yPositions = Array(300).join(0).split('');
+    var ctx=q.getContext('2d');
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    var draw = function () {
+      ctx.fillStyle='rgba(0,0,0,.05)';
+      ctx.fillRect(0,0,width,height);
+      ctx.fillStyle='#0F0';
+      ctx.font = '10pt Georgia';
+      yPositions.map(function(y, index) {
+        text = String.fromCharCode(1e2+Math.random()*33);
+        x = (index * 10)+10;
+        q.getContext('2d').fillText(text, x, y);
+        if(y > 100 + Math.random()*1e4) {
+          yPositions[index]=0;
+        } else {
+          yPositions[index] = y + 10;
+        }
+      });
+    };
+
+    RunMatrix();
+
+    function RunMatrix() {
+      if(typeof Game_Interval != "undefined") clearInterval(Game_Interval);
+      Game_Interval = setInterval(draw, 35);
+    }
+
+  });
+</script>
 </body>
 </html>
 

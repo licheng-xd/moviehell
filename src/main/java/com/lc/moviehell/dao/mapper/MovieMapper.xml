@@ -19,4 +19,8 @@
     <select id="getMovieCount" resultType="java.lang.Integer">
         select count(id) from movie_detail;
     </select>
+
+    <select id="searchMovie" resultMap="movieMap">
+        select * from movie_detail where name like #{key} order by id desc;
+    </select>
 </mapper>

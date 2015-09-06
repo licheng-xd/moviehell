@@ -63,4 +63,12 @@ public class MovieServiceImpl {
         return getMovieById(id) != null;
     }
 
+    public List<Movie> search(String key) {
+        try {
+            return mapper.searchMovie("%" + key + "%");
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return null;
+        }
+    }
 }
