@@ -24,6 +24,7 @@
   <script src="/js/Base64.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
   <%--<script src="/js/movie.js"></script>--%>
+
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -34,15 +35,7 @@
       ga('send', 'pageview');
 
     </script>
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?2a79b8f2c726d310f748aca10af76b0f";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
+    
 </head>
 
 <body>
@@ -51,8 +44,8 @@
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <li role="presentation"><a href="/index.html">Home</a></li>
-        <li role="presentation"><a href="/about.html">About</a></li>
+        <li role="presentation"><a href="/index.html">首页</a></li>
+        <li role="presentation"><a href="/about.html">关于</a></li>
       </ul>
     </nav>
     <h3 class="text-muted">Movie Hell</h3>
@@ -82,7 +75,7 @@
       } else {
         for (Movie m : movies) {
     %>
-          <a class="list-group-item" onclick="get_movie(<%=m.getId()%>)"><%=m.getName()%><label style="float:right;font-weight:normal;"><%=m.getTime()%></label></a>
+          <a class="list-group-item cursor" onclick="get_movie(<%=m.getId()%>)"><%=m.getName()%><label style="float:right;font-weight:normal;"><%=m.getTime()%></label></a>
     <%
         }
       }
@@ -94,7 +87,7 @@
   </footer>
 
 </div> <!-- /container -->
-
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256273064'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256273064%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 <script>
   $(document).ready(function(){
     var qe = document.getElementById("q");

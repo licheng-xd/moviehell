@@ -27,7 +27,7 @@ function gotoPage(offset) {
                 var movies = resp["obj"];
                 for (var idx in movies) {
                     var movie = eval("(" + movies[idx] + ")");
-                    list.innerHTML += "<a class=\"list-group-item\" onclick=\"get_movie(" + movie["id"] + ")\">" + movie["name"] + "<label style=\"float:right;font-weight:normal;\">" + movie["time"] + "</label></a>";
+                    list.innerHTML += "<a class=\"list-group-item cursor\" onclick=\"get_movie(" + movie["id"] + ")\">" + movie["name"] + "<label style=\"float:right;font-weight:normal;\">" + movie["time"] + "</label></a>";
                 }
             } else {
                 list.innerHTML += "<a class=\"list-group-item\">暂无数据</a>";
@@ -47,15 +47,15 @@ function gotoPage(offset) {
         var end = start + 5;
         if (end > pageCount) end = pageCount;
         var pages = document.getElementById("pages");
-        pages.innerHTML = "<li><a onclick=\"gotoPage(" + (pageOffset - 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+        pages.innerHTML = "<li><a class='cursor' onclick=\"gotoPage(" + (pageOffset - 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
         for (var i = start; i < end; i++) {
             if (i == pageOffset) {
                 pages.innerHTML += "<li class=\"active\"><a onclick=\"gotoPage(" + i + ")\">" + (i + 1) + "</a></li>"
             } else {
-                pages.innerHTML += "<li><a onclick=\"gotoPage(" + i + ")\">" + (i + 1) + "</a></li>"
+                pages.innerHTML += "<li><a class='cursor' onclick=\"gotoPage(" + i + ")\">" + (i + 1) + "</a></li>"
             }
         }
-        pages.innerHTML += "<li><a onclick=\"gotoPage(" + (pageOffset + 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+        pages.innerHTML += "<li><a class='cursor' onclick=\"gotoPage(" + (pageOffset + 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
     }
 }
 
@@ -83,12 +83,16 @@ function getPageCount() {
 
 function get_movie(id) {
     console.log("movie: " + id);
-    window.open("/movie/" + id);
+    window.open("movie/" + id);
 }
 
 function searchMovie() {
     var key = document.getElementById("search_key").value;
     if (key.length == 0) {
+        return;
+    }
+    if (key.length < 2) {
+        alert("搜索关键字不能少于2个字");
         return;
     }
     key = BASE64.encoder(key);

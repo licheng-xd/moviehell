@@ -24,6 +24,14 @@ body {
     line-height: 50px;
 }
 
+.m-active {
+    background-color: #cccccc;
+}
+
+.cursor {
+    cursor:pointer;
+}
+
 /* Custom page footer */
 .footer {
     padding-top: 19px;

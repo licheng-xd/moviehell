@@ -4,7 +4,7 @@
     <resultMap id="movieMap" type="com.lc.moviehell.dao.domain.Movie"></resultMap>
 
     <insert id="insertMovie" parameterType="com.lc.moviehell.dao.domain.Movie">
-        insert into movie_detail(id, name, img, intro, href, time, createtime)
+        insert ignore into movie_detail(id, name, img, intro, href, time, createtime)
         values (#{id}, #{name}, #{img}, #{intro}, #{href}, #{time}, #{createtime});
     </insert>
 
