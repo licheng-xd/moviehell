@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="../img/favicon.ico">
 
-  <title>Movie Hell</title>
+  <title><%=request.getAttribute("title")%> - Movie Hell</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -22,15 +22,15 @@
   <script src="/js/movie.js"></script>
 
   <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-66789738-1', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-71702178-2', 'auto');
+    ga('send', 'pageview');
 
-    </script>
+  </script>
     
 </head>
 
@@ -62,6 +62,9 @@
     <br><label>注：将上面的链接复制到迅雷中进行下载。</label></a>
   </div>
 
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="<%=request.getAttribute("id")%>" data-title="<%=request.getAttribute("title")%>" data-url="<%=request.getAttribute("id")%>"></div>
+  <!-- 多说评论框 end -->
 
   <footer class="footer">
     <p>&copy; LC 2015</p>
@@ -74,6 +77,20 @@ function show_download() {
   document.getElementById("download").style.visibility = "visible";
 }
 </script>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"moviehell"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- 多说公共JS代码 end -->
 </body>
 </html>
 

@@ -63,6 +63,7 @@ public class MovieController {
             request.setAttribute("img", movie.getImg());
             request.setAttribute("href", movie.getHref());
             request.setAttribute("intro", movie.getIntro());
+            request.setAttribute("id", movie.getId());
             return "movie";
         }
     }
@@ -91,5 +92,4 @@ public class MovieController {
     public ResponseEntry getTest(HttpServletRequest request) {
         return ResponseEntry.builder().setObj("test");
     }
-
 }
