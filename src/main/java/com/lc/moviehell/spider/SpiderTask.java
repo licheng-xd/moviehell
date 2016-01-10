@@ -30,5 +30,8 @@ public class SpiderTask {
             .run();
     }
 
+    public static void main(String[] args) {
+        new SpiderTask().run();
+    }
 
 }

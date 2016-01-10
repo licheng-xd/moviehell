@@ -34,9 +34,9 @@ public class MovieSpider implements PageProcessor {
                 page.setSkip(true);
                 List<String> urls = page.getHtml().css("div.co_content2")
                     .links().all();
-                if (movieService.getMovieCount() > 30) {
-                    if (urls.size() > 30) {
-                        page.addTargetRequests(urls.subList(0, 30));
+                if (movieService.getMovieCount() > 20) {
+                    if (urls.size() > 20) {
+                        page.addTargetRequests(urls.subList(0, 20));
                     } else {
                         page.addTargetRequests(urls);
                     }

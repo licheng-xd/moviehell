@@ -82,8 +82,8 @@ function getPageCount() {
 }
 
 function get_movie(id) {
-    console.log("movie: " + id);
-    window.open("movie/" + id);
+    //console.log("movie: " + id);
+    window.open("/movie/" + id);
 }
 
 function searchMovie() {
