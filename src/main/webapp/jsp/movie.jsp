@@ -50,6 +50,7 @@
   <div class="jumbotron">
     <h3 class="title"><%=request.getAttribute("title")%></h3>
     <div class="imagediv"><img class="image" src="<%=request.getAttribute("img")%>"/></div>
+    <a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣电影</a>
     <p class="intro"><%=request.getAttribute("intro").toString().replace("\r\n",
             "<br/>")%></p>
 
@@ -67,7 +68,7 @@
   <!-- 多说评论框 end -->
 
   <footer class="footer">
-    <p>&copy; LC 2015</p>
+    <p>&copy; LC 2016</p>
   </footer>
 
 </div> <!-- /container -->

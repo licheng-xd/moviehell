@@ -83,7 +83,7 @@
   </div>
 
   <footer class="footer">
-    <p>&copy; LC 2015</p>
+    <p>&copy; LC 2016</p>
   </footer>
 
 </div> <!-- /container -->

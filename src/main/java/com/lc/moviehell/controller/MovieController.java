@@ -59,7 +59,10 @@ public class MovieController {
         if (movie == null) {
             return "404";
         } else {
-            request.setAttribute("title", movie.getName());
+            String name = movie.getName();
+            String realName = name.substring(name.indexOf('《') + 1, name.indexOf('》'));
+            request.setAttribute("title", name);
+            request.setAttribute("name", realName);
             request.setAttribute("img", movie.getImg());
             request.setAttribute("href", movie.getHref());
             request.setAttribute("intro", movie.getIntro());
