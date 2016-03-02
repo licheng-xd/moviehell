@@ -1,11 +1,11 @@
 package com.lc.moviehell.controller;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.util.Base64;
 import com.lc.moviehell.bean.RespCode;
 import com.lc.moviehell.bean.ResponseEntry;
 import com.lc.moviehell.dao.domain.Movie;
 import com.lc.moviehell.service.impl.MovieServiceImpl;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class MovieController {
         List<Movie> movies = new ArrayList<Movie>();
         if (key.length() > 0) {
             try {
-                key = new String(Base64.decodeFast(key), "utf-8");
+                key = new String(Base64.decodeBase64(key), "utf-8");
                 logger.debug("search movie key:{}", key);
                 movies = movieService.search(key);
                 if (movies == null) {
@@ -94,5 +95,9 @@ public class MovieController {
     @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
     public ResponseEntry getTest(HttpServletRequest request) {
         return ResponseEntry.builder().setObj("test");
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        System.out.println(new String(Base64.decodeBase64("6Y605Z2X5qO_5ai05ayt55iv"), "utf-8"));
     }
 }

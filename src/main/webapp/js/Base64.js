@@ -1,6 +1,6 @@
 
 (function(){
-	var BASE64_MAPPING = [
+	/*var BASE64_MAPPING = [
 		'A','B','C','D','E','F','G','H',
 		'I','J','K','L','M','N','O','P',
 		'Q','R','S','T','U','V','W','X',
@@ -9,6 +9,17 @@
 		'o','p','q','r','s','t','u','v',
 		'w','x','y','z','0','1','2','3',
 		'4','5','6','7','8','9','+','/'
+	];*/
+
+	var BASE64_MAPPING = [
+		'A','B','C','D','E','F','G','H',
+		'I','J','K','L','M','N','O','P',
+		'Q','R','S','T','U','V','W','X',
+		'Y','Z','a','b','c','d','e','f',
+		'g','h','i','j','k','l','m','n',
+		'o','p','q','r','s','t','u','v',
+		'w','x','y','z','0','1','2','3',
+		'4','5','6','7','8','9','-','_'
 	];
 
 	/**
@@ -82,7 +93,7 @@
 
 	var __BASE64 = {
 			/**
-			 *BASE64 Encode
+			 *BASE64 URL safe Encode
 			 */
 			encoder:function(str){
 				var base64_Index = [];
@@ -138,7 +149,7 @@
 				return base64;
 			},
 			/**
-			 *BASE64  Decode for UTF-8 
+			 *BASE64  Decode url safe for UTF-8
 			 */
 			decoder : function(_base64Str){
 				var _len = _base64Str.length;
