@@ -5,25 +5,23 @@ import com.alibaba.fastjson.JSON;
 /**
  * Created by lc on 15/4/23.
  */
-public class ResponseEntry {
+public class RespBody {
     private int code;
 
     private String msg;
 
     private Object obj;
 
-    @Deprecated
-    public ResponseEntry(int code) {
+    private RespBody(int code) {
         this.code = code;
     }
 
-    @Deprecated
-    public ResponseEntry(int code, String msg) {
+    private RespBody(int code, String msg) {
         this.msg = msg;
         this.code = code;
     }
 
-    private ResponseEntry() {
+    private RespBody() {
 
     }
 
@@ -31,7 +29,7 @@ public class ResponseEntry {
         return code;
     }
 
-    public ResponseEntry setCode(int code) {
+    public RespBody setCode(int code) {
         this.code = code;
         return this;
     }
@@ -40,7 +38,7 @@ public class ResponseEntry {
         return msg;
     }
 
-    public ResponseEntry setMsg(String msg) {
+    public RespBody setMsg(String msg) {
         this.msg = msg;
         return this;
     }
@@ -49,17 +47,17 @@ public class ResponseEntry {
         return obj;
     }
 
-    public ResponseEntry setObj(Object obj) {
+    public RespBody setObj(Object obj) {
         this.obj = obj;
         return this;
     }
 
-    public static ResponseEntry builder() {
-        return new ResponseEntry(RespCode.OK);
+    public static RespBody success() {
+        return new RespBody(RespCode.OK);
     }
 
-    public static ResponseEntry builder(int code) {
-        return new ResponseEntry(code);
+    public static RespBody builder(int code) {
+        return new RespBody(code);
     }
 
     @Override public String toString() {
