@@ -14,7 +14,9 @@
             <if test="name!=null">name=#{name},</if>
             <if test="hrefs!=null">hrefs=#{hrefs},</if>
             <if test="size!=null">size=#{size},</if>
+            <if test="intro!=null">intro=#{intro},</if>
             <if test="time!=null">time=#{time},</if>
+            <if test="img!=null">img=#{img},</if>
             <if test="updatetime!=null">updatetime=#{updatetime},</if>
         </set>
         where id = #{id};

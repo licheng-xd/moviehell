@@ -30,7 +30,10 @@ public class UstvPipeline implements Pipeline {
         String introduce = result.get("introduce");
         String url = result.get("url");
         String time = result.get("time");
-        if (name == null || img == null || hrefs == null || introduce == null || url == null) {
+        if (img == null) {
+            img = "http://nos-yx.netease.com/yixinpublic/moviehell-404.jpg";
+        }
+        if (name == null || hrefs == null || introduce == null || url == null) {
             logger.warn("invalid result: {}", result);
         } else {
             if (!url.contains("/tv/oumeitv")) {
@@ -68,7 +71,8 @@ public class UstvPipeline implements Pipeline {
                     ustv.setUpdatetime(now);
                     ustvService.updateUstv(ustv);
                     logger.info("update ustv {}, {}", id, name);
-                } else {
+                }
+                else {
                     logger.warn("ustv size not modify id:{} oldsize:{} newsize:{}", id, ustv.getSize(), hrefs.size());
                 }
             }

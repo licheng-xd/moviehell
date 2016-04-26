@@ -28,8 +28,13 @@ public class UstvSpider implements PageProcessor {
             String url = page.getUrl().toString();
             Html html = page.getHtml();
             String name = html.xpath("//div[@class='title_all']/h1/font/text()").toString();
-            String image = html.xpath("//span[@style='FONT-SIZE: 12px']/p/img/@src").toString();
-            if (name == null || image == null) {
+            String timeTmp = html.xpath("//div[@class='co_content8']/ul/text()").toString();
+            String time = null;
+            Matcher m = RegexUtil.timePattern.matcher(timeTmp);
+            if (m.find()) {
+                time = m.group();
+            }
+            if (name == null || time == null) {
                 page.setSkip(true);
                 List<String> urls = html.xpath(
                     "//div[@class='co_content3']//td//a/@href").regex(".*/tv/oumeitv.*[1-9]\\d*.html$").all();
@@ -42,27 +47,24 @@ public class UstvSpider implements PageProcessor {
                 return;
             }
             page.putField("name", name);
-            page.putField("img", image);
-            List<String> introduces = html.xpath("//span[@style='FONT-SIZE: 12px']/p").all();
-            StringBuilder sb = new StringBuilder();
-            for (String intro : introduces) {
-                if (!intro.trim().startsWith("<p><")) {
-                    sb.append(intro.trim()).append("\r\n");
+            String image = html.xpath("//span[@style='FONT-SIZE: 12px']/p/img/@src").toString();
+            if (image == null) {
+                image = html.xpath("//span[@style='FONT-SIZE: 12px']/img/@src").toString();
+                if (image == null) {
+                    image = html.xpath("//span[@style='FONT-SIZE: 12px']/p/font/img/@src").toString();
                 }
             }
-            String introduce  = sb.toString().replaceAll("<p>", "")
-                .replaceAll("</p>", "")
-                .replaceAll("<br />", "\r\n").replaceAll("<.*>", " ")
-                .trim();
+            page.putField("img", image);
+            List<String> introduces = html.xpath("//span[@style='FONT-SIZE: 12px']").all();
+            StringBuilder sb = new StringBuilder();
+            for (String intro : introduces) {
+                intro = intro.replace("<br />", "\r\n").replaceAll("<[^>]*>", "");
+                sb.append(intro.trim()).append("\r\n");
+            }
+            String introduce  = sb.toString().trim();
             page.putField("introduce", introduce);
             page.putField("url", url);
             page.putField("hrefs", html.xpath("//td[@style='WORD-WRAP: break-word']/a/@href").all());
-            String timeTmp = html.xpath("//div[@class='co_content8']/ul/text()").toString();
-            String time = null;
-            Matcher m = RegexUtil.timePattern.matcher(timeTmp);
-            if (m.find()) {
-                time = m.group();
-            }
             page.putField("time", time);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

@@ -9,7 +9,7 @@
   <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../img/favicon.ico">
+  <link rel="icon" href="../../img/favicon.ico">
 
   <title><%=request.getAttribute("title")%> - Movie Hell</title>
 
@@ -61,7 +61,7 @@
       <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span> 下载地址
     </button>
     <br/><br/>
-    <div id="ustv_download" style="visibility: hidden;font-size: 12px; display: block;">
+    <div id="ustv_download" style="font-size: 12px; display: block;">
       <%
         JSONArray hrefs = (JSONArray) request.getAttribute("hrefs");
         for (Object href1 : hrefs) {
