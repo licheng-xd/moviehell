@@ -1,5 +1,6 @@
 <%@ page import="com.lc.moviehell.dao.domain.Movie" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.lc.moviehell.dao.domain.Ustv" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -44,9 +45,9 @@
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <li role="presentation"><a href="index.html">电影</a></li>
-        <li role="presentation"><a href="ustv.jsp">美剧</a></li>
-        <li role="presentation"><a href="about.html">关于</a></li>
+        <li role="presentation"><a href="/index.html">电影</a></li>
+        <li role="presentation"><a href="/ustv.html">美剧</a></li>
+        <li role="presentation"><a href="/about.html">关于</a></li>
       </ul>
     </nav>
     <h3 class="text-muted">Movie Hell</h3>
@@ -55,7 +56,7 @@
   <div class="row">
     <div class="col-lg-6" style="width: 100%">
       <div class="input-group">
-        <input type="text" id="search_key" class="form-control" onkeypress="searchInput()" placeholder="Search Movie ...">
+        <input type="text" id="search_key" class="form-control" onkeypress="searchInput()" placeholder="Search Key">
                 <span class="input-group-btn">
                     <button class="btn btn-default" onclick="searchMovie()" type="button">搜索</button>
                 </span>
@@ -68,7 +69,8 @@
     <a class="list-group-item active">搜索结果</a>
     <%
       List<Movie> movies = (List<Movie>) request.getAttribute("result");
-      if (movies.size() == 0) {
+      List<Ustv> ustvs = (List<Ustv>) request.getAttribute("ustvresult");
+      if (movies.size() == 0 && ustvs.size() == 0) {
     %>
     <a class="list-group-item">不存在</a>
     <canvas id="q" height="350px">...</canvas><br><br>
@@ -76,7 +78,12 @@
       } else {
         for (Movie m : movies) {
     %>
-          <a class="list-group-item cursor" onclick="get_movie(<%=m.getId()%>)"><%=m.getName()%><label style="float:right;font-weight:normal;"><%=m.getTime()%></label></a>
+          <a class="list-group-item cursor" onclick="get_movie(<%=m.getId()%>)">[电影] &nbsp;&nbsp;<%=m.getName()%><label style="float:right;font-weight:normal;"><%=m.getTime()%></label></a>
+    <%
+        }
+        for (Ustv tv : ustvs) {
+    %>
+          <a class="list-group-item cursor" onclick="get_ustv(<%=tv.getId()%>)">[美剧] &nbsp;&nbsp;<%=tv.getName()%><label style="float:right;font-weight:normal;"><%=tv.getTime()%></label></a>
     <%
         }
       }

@@ -6,7 +6,6 @@ import com.lc.moviehell.bean.RespBody;
 import com.lc.moviehell.bean.RespCode;
 import com.lc.moviehell.dao.domain.Ustv;
 import com.lc.moviehell.service.IUstvService;
-import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,24 +69,5 @@ public class UstvController {
             request.setAttribute("id", tv.getId());
             return "ustv";
         }
-    }
-
-    @RequestMapping(value = "search/{key}")
-    public String search(HttpServletRequest request, @PathVariable String key) {
-        List<Ustv> tvs = new ArrayList<Ustv>();
-        if (key.length() > 0) {
-            try {
-                key = new String(Base64.decodeBase64(key), "utf-8");
-                logger.debug("search movie key:{}", key);
-                tvs = ustvService.search(key);
-                if (tvs == null) {
-                    tvs = new ArrayList<Ustv>();
-                }
-            } catch (Exception e) {
-                logger.error(e.getMessage(), e);
-            }
-        }
-        request.setAttribute("result", tvs);
-        return "search";
     }
 }

@@ -49,7 +49,7 @@ public class UstvServiceImpl implements IUstvService {
 
     @Override public List<Ustv> search(String key) {
         try {
-            return mapper.searchUstv(key);
+            return mapper.searchUstv("%" + key + "%");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return null;

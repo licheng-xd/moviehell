@@ -37,6 +37,10 @@ public class UstvSpider implements PageProcessor {
                 page.addTargetRequests(urls);
                 return;
             }
+            if (!url.contains("/tv/oumeitv")) {
+                page.setSkip(true);
+                return;
+            }
             page.putField("name", name);
             page.putField("img", image);
             List<String> introduces = html.xpath("//span[@style='FONT-SIZE: 12px']/p").all();

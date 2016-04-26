@@ -41,14 +41,10 @@ public class OnceSpider implements PageProcessor {
             List<String> introduces = html.xpath("//span[@style='FONT-SIZE: 12px']/p").all();
             StringBuilder sb = new StringBuilder();
             for (String intro : introduces) {
-                if (!intro.trim().startsWith("<p><")) {
-                    sb.append(intro.trim()).append("\r\n");
-                }
+                intro = intro.replace("<br />", "\r\n").replaceAll("<[^>]*>", "");
+                sb.append(intro.trim()).append("\r\n");
             }
-            String introduce  = sb.toString().replaceAll("<p>", "")
-                .replaceAll("</p>", "")
-                .replaceAll("<br />", "\r\n").replaceAll("<.*>", " ")
-                .trim();
+            String introduce  = sb.toString().trim();
             page.putField("introduce", introduce);
             page.putField("url", url);
             page.putField("hrefs", html.xpath("//td[@style='WORD-WRAP: break-word']/a/@href").all());

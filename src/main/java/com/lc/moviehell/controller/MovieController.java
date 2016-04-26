@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.lc.moviehell.bean.RespCode;
 import com.lc.moviehell.bean.RespBody;
 import com.lc.moviehell.dao.domain.Movie;
+import com.lc.moviehell.dao.domain.Ustv;
+import com.lc.moviehell.service.IUstvService;
 import com.lc.moviehell.service.impl.MovieServiceImpl;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
@@ -31,6 +33,9 @@ public class MovieController {
 
     @Resource
     private MovieServiceImpl movieService;
+
+    @Resource
+    private IUstvService ustvService;
 
     @ResponseBody
     @RequestMapping(value = "/page/{offset}", method = RequestMethod.GET)
@@ -76,20 +81,26 @@ public class MovieController {
 
     @RequestMapping(value = "search/{key}")
     public String search(HttpServletRequest request, @PathVariable String key) {
+        try {
+            key = new String(Base64.decodeBase64(key), "utf-8");
+            logger.debug("search movie key:{}", key);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
         List<Movie> movies = new ArrayList<Movie>();
+        List<Ustv> ustvs = new ArrayList<Ustv>();
         if (key.length() > 0) {
-            try {
-                key = new String(Base64.decodeBase64(key), "utf-8");
-                logger.debug("search movie key:{}", key);
-                movies = movieService.search(key);
-                if (movies == null) {
-                    movies = new ArrayList<Movie>();
-                }
-            } catch (Exception e) {
-                logger.error(e.getMessage(), e);
+            movies = movieService.search(key);
+            if (movies == null) {
+                movies = new ArrayList<Movie>();
+            }
+            ustvs = ustvService.search(key);
+            if (ustvs == null) {
+                ustvs = new ArrayList<Ustv>();
             }
         }
         request.setAttribute("result", movies);
+        request.setAttribute("ustvresult", ustvs);
         return "search";
     }
 

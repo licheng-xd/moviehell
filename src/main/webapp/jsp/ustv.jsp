@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="../css/jumbotron-narrow.css">
+  <link rel="stylesheet" href="../../css/jumbotron-narrow.css">
 
   <script src="/js/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
@@ -41,9 +41,9 @@
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <li role="presentation"><a href="index.html">电影</a></li>
-        <li role="presentation"><a href="ustv.jsp">美剧</a></li>
-        <li role="presentation"><a href="about.html">关于</a></li>
+        <li role="presentation"><a href="/index.html">电影</a></li>
+        <li role="presentation"><a href="/ustv.html">美剧</a></li>
+        <li role="presentation"><a href="/about.html">关于</a></li>
       </ul>
     </nav>
     <h3 class="text-muted">Movie Hell</h3>

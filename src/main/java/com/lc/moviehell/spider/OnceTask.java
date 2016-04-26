@@ -4,7 +4,6 @@ import com.lc.moviehell.service.IUstvService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
@@ -14,7 +13,7 @@ import javax.annotation.Resource;
  *
  * Created by lc on 15/8/24.
  */
-@Service
+//@Service
 public class OnceTask {
     private static final Logger logger = LoggerFactory.getLogger(
         OnceTask.class);
@@ -34,7 +33,16 @@ public class OnceTask {
         }
     }
 
+    public void test() {
+        logger.info("start test spider ...");
+        Spider.create(new OnceSpider())
+            .addUrl("http://www.ygdy8.com/html/tv/oumeitv/20140930/46271.html")
+            .addPipeline(new UstvPipeline(ustvService))
+            .thread(1)
+            .run();
+    }
+
     public static void main(String[] args) {
-        new OnceTask().run();
+        new OnceTask().test();
     }
 }

@@ -33,6 +33,12 @@ public class UstvPipeline implements Pipeline {
         if (name == null || img == null || hrefs == null || introduce == null || url == null) {
             logger.warn("invalid result: {}", result);
         } else {
+            if (!url.contains("/tv/oumeitv")) {
+                return;
+            }
+            if (introduce.contains("下载地址")) {
+                introduce = introduce.substring(0, introduce.indexOf("下载地址") - 2);
+            }
             url = url.substring(0, url.length() - 5);
             String[] tmp = url.split("/");
             long id = Long.parseLong(tmp[tmp.length - 1]);
