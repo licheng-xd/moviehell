@@ -10,19 +10,19 @@ import us.codecraft.webmagic.selector.Html;
 import java.util.List;
 
 /**
- * Created by lc on 15/7/22.
+ * 美剧爬虫
+ *
+ * Created by lc on 16/4/25.
  */
-public class OnceSpider implements PageProcessor {
+public class UstvSpider implements PageProcessor {
     private static final Logger logger = LoggerFactory.getLogger(
-        OnceSpider.class);
+        UstvSpider.class);
 
     private Site site = Site.me()
         .setRetryTimes(3).setSleepTime(1000).setUseGzip(true);
 
-    @Override
-    public void process(Page page) {
+    @Override public void process(Page page) {
         try {
-            // 初始化美剧频道
             String url = page.getUrl().toString();
             Html html = page.getHtml();
             String name = html.xpath("//div[@class='title_all']/h1/font/text()").toString();
@@ -30,24 +30,17 @@ public class OnceSpider implements PageProcessor {
             if (name == null || image == null) {
                 page.setSkip(true);
                 List<String> urls = html.xpath(
-                    "//div[@class='co_area2']//td//a[@class='ulink']/@href").all();
+                    "//div[@class='co_content3']//td//a/@href").regex(".*/tv/oumeitv.*[1-9]\\d*.html$").all();
+//                logger.info(urls.toString());
                 page.addTargetRequests(urls);
                 return;
             }
             page.putField("name", name);
             page.putField("img", image);
-            List<String> introduces = html.xpath("//span[@style='FONT-SIZE: 12px']/p").all();
-            StringBuilder sb = new StringBuilder();
-            for (String intro : introduces) {
-                if (!intro.trim().startsWith("<p><")) {
-                    sb.append(intro.trim()).append("\r\n");
-                }
-            }
-            String introduce  = sb.toString().replaceAll("<p>", "")
-                .replaceAll("</p>", "")
-                .replaceAll("<br />", "\r\n").replaceAll("<.*>", " ")
+            String introduce = html.xpath("//span[@style='FONT-SIZE: 12px']/p").replace("<p>", "")
+                .replace("</p>", "")
+                .replace("<br />", "\r\n").replace("<.*>", " ").toString()
                 .trim();
-            System.out.println(introduce);
             page.putField("introduce", introduce);
             page.putField("url", url);
             page.putField("hrefs", html.xpath("//td[@style='WORD-WRAP: break-word']/a/@href").all());
@@ -59,8 +52,7 @@ public class OnceSpider implements PageProcessor {
         }
     }
 
-    @Override
-    public Site getSite() {
+    @Override public Site getSite() {
         return site;
     }
 }

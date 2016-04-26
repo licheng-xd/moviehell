@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lc.moviehell.dao.UstvMapper">
+
+    <insert id="insertUstv" parameterType="com.lc.moviehell.dao.domain.Ustv">
+        insert ignore into ustv_detail(id, name, img, intro, hrefs, size, time, createtime, updatetime)
+        values (#{id}, #{name}, #{img}, #{intro}, #{hrefs}, #{size}, #{time}, #{createtime}, #{updatetime});
+    </insert>
+
+    <update id="updateUstv" parameterType="com.lc.moviehell.dao.domain.Ustv">
+        update ustv_detail
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="hrefs!=null">hrefs=#{hrefs},</if>
+            <if test="size!=null">size=#{size},</if>
+            <if test="time!=null">time=#{time},</if>
+            <if test="updatetime!=null">updatetime=#{updatetime},</if>
+        </set>
+        where id = #{id};
+    </update>
+
+
+</mapper>

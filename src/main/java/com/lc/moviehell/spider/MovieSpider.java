@@ -30,16 +30,15 @@ public class MovieSpider implements PageProcessor {
         try {
             String name = page.getHtml()
                 .xpath("//div[@class='title_all']/h1/font/text()").toString();
-            if (name == null) {
+            String img = page.getHtml()
+                .xpath("//span[@style='FONT-SIZE: 12px']/p/img/@src")
+                .toString();
+            if (name == null || img == null) {
                 page.setSkip(true);
                 List<String> urls = page.getHtml().css("div.co_content2")
                     .links().all();
-                if (movieService.getMovieCount() > 20) {
-                    if (urls.size() > 20) {
-                        page.addTargetRequests(urls.subList(0, 20));
-                    } else {
-                        page.addTargetRequests(urls);
-                    }
+                if (movieService.getMovieCount() > 20 && urls.size() > 20) {
+                    page.addTargetRequests(urls.subList(0, 20));
                 } else {
                     page.addTargetRequests(urls);
                 }
@@ -49,9 +48,7 @@ public class MovieSpider implements PageProcessor {
             page.putField("href", page.getHtml()
                 .xpath("//td[@style='WORD-WRAP: break-word']/a/@href")
                 .toString());
-            page.putField("img", page.getHtml()
-                .xpath("//span[@style='FONT-SIZE: 12px']/p/img/@src")
-                .toString());
+            page.putField("img", img);
             String introduce = page.getHtml()
                 .xpath("//span[@style='FONT-SIZE: 12px']/p").replace("<p>", "")
                 .replace("</p>", "")

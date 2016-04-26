@@ -1,6 +1,6 @@
 package com.lc.moviehell.spider;
 
-import com.lc.moviehell.service.impl.MovieServiceImpl;
+import com.lc.moviehell.service.impl.UstvServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,28 +10,27 @@ import us.codecraft.webmagic.Spider;
 import javax.annotation.Resource;
 
 /**
- * Created by lc on 15/8/24.
+ * Created by lc on 16/4/25.
  */
 @Service
-public class SpiderTask {
+public class UstvTask {
     private static final Logger logger = LoggerFactory.getLogger(
-        SpiderTask.class);
+        UstvTask.class);
 
     @Resource
-    private MovieServiceImpl movieService;
+    private UstvServiceImpl ustvService;
 
     @Scheduled(cron = "0 */20 * * * ?")
     public void run() {
-        logger.info("start movie spider ...");
-        Spider.create(new MovieSpider(movieService))
-            .addUrl("http://dytt8.net/")
-            .addPipeline(new MoviePipeline(movieService))
+        logger.info("start ustv spider ...");
+        Spider.create(new UstvSpider())
+            .addUrl("http://www.ygdy8.net/")
+            .addPipeline(new UstvPipeline(ustvService))
             .thread(1)
             .run();
     }
 
     public static void main(String[] args) {
-        new SpiderTask().run();
+        new UstvTask().run();
     }
-
 }

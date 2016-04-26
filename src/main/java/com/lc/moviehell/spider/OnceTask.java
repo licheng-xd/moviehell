@@ -1,32 +1,40 @@
 package com.lc.moviehell.spider;
 
-import com.lc.moviehell.service.impl.MovieServiceImpl;
+import com.lc.moviehell.service.IUstvService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
 
 /**
+ * 修复宕机时段丢失数据 或 初始化数据
+ *
  * Created by lc on 15/8/24.
  */
-//@Service
+@Service
 public class OnceTask {
     private static final Logger logger = LoggerFactory.getLogger(
         OnceTask.class);
 
     @Resource
-    private MovieServiceImpl movieService;
+    private IUstvService ustvService;
 
-    //@Scheduled(fixedDelay = 5000)
-    public void runOnce() {
+    @Scheduled(fixedDelay = 5000)
+    public void run() {
         logger.info("start once spider ...");
-        for (int i=1; i<272; i++) {
+        for (int i=1; i<23; i++) {
             Spider.create(new OnceSpider())
-                .addUrl("http://www.ygdy8.net/html/gndy/dyzz/list_23_" + i + ".html")
-                .addPipeline(new MoviePipeline(movieService))
+                .addUrl("http://www.ygdy8.net/html/tv/oumeitv/list_9_" + i + ".html")
+                .addPipeline(new UstvPipeline(ustvService))
                 .thread(1)
                 .run();
         }
+    }
+
+    public static void main(String[] args) {
+        new OnceTask().run();
     }
 }

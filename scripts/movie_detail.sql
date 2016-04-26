@@ -1,5 +1,5 @@
 create table movie_detail (
-  `id` bigint(20) auto_increment,
+  `id` bigint(20) NOT NULL comment'id',
   `name` VARCHAR(64) NOT NULL comment '名称',
   `img` VARCHAR(128) NOT NULL comment '图片url',
   `intro` VARCHAR(2048) NOT NULL COMMENT '简介',
