@@ -15,7 +15,7 @@ public interface IUstvService {
 
     public List<Ustv> getUstvByOffset(int offset);
 
-    public boolean hasUstv(long id);
+    public List<Ustv> search(String key);
 
     public int getUstvCount();
 

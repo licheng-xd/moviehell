@@ -48,8 +48,9 @@
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <li role="presentation"><a href="/index.html">首页</a></li>
-        <li role="presentation"><a href="/about.html">关于</a></li>
+        <li role="presentation"><a href="index.html">电影</a></li>
+        <li role="presentation"><a href="ustv.jsp">美剧</a></li>
+        <li role="presentation"><a href="about.html">关于</a></li>
       </ul>
     </nav>
     <h3 class="text-muted">Movie Hell</h3>

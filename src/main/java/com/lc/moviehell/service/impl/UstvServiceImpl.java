@@ -30,19 +30,39 @@ public class UstvServiceImpl implements IUstvService {
     }
 
     @Override public Ustv getUstvById(long id) {
-        return null;
+        try {
+            return mapper.getUstvById(id);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return null;
+        }
     }
 
     @Override public List<Ustv> getUstvByOffset(int offset) {
-        return null;
+        try {
+            return mapper.getUstvsByOffset(offset);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return null;
+        }
     }
 
-    @Override public boolean hasUstv(long id) {
-        return false;
+    @Override public List<Ustv> search(String key) {
+        try {
+            return mapper.searchUstv(key);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return null;
+        }
     }
 
     @Override public int getUstvCount() {
-        return 0;
+        try {
+            return mapper.getUstvCount();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return 0;
+        }
     }
 
     @Override public int updateUstv(Ustv ustv) {

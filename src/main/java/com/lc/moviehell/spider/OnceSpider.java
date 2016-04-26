@@ -1,5 +1,6 @@
 package com.lc.moviehell.spider;
 
+import com.lc.moviehell.util.RegexUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
@@ -8,6 +9,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
 import java.util.List;
+import java.util.regex.Matcher;
 
 /**
  * Created by lc on 15/7/22.
@@ -47,12 +49,15 @@ public class OnceSpider implements PageProcessor {
                 .replaceAll("</p>", "")
                 .replaceAll("<br />", "\r\n").replaceAll("<.*>", " ")
                 .trim();
-            System.out.println(introduce);
             page.putField("introduce", introduce);
             page.putField("url", url);
             page.putField("hrefs", html.xpath("//td[@style='WORD-WRAP: break-word']/a/@href").all());
-            String time = html.xpath("//div[@class='co_content8']/ul/text()").toString()
-                .substring(6).replaceAll("[\\s\\u00A0]+$", ""); // 去掉所有空白符,包括uincode编码的对应ascii码=160的奇葩空格
+            String timeTmp = html.xpath("//div[@class='co_content8']/ul/text()").toString();
+            String time = null;
+            Matcher m = RegexUtil.timePattern.matcher(timeTmp);
+            if (m.find()) {
+                time = m.group();
+            }
             page.putField("time", time);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

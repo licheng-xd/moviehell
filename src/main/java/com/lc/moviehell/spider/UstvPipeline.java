@@ -33,8 +33,6 @@ public class UstvPipeline implements Pipeline {
         if (name == null || img == null || hrefs == null || introduce == null || url == null) {
             logger.warn("invalid result: {}", result);
         } else {
-            logger.info(name);
-            logger.info(hrefs.toString());
             url = url.substring(0, url.length() - 5);
             String[] tmp = url.split("/");
             long id = Long.parseLong(tmp[tmp.length - 1]);

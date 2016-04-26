@@ -13,7 +13,7 @@ public interface UstvMapper {
 
     int updateUstv(Ustv ustv);
 
-    Ustv getUstv(long id);
+    Ustv getUstvById(long id);
 
     List<Ustv> getUstvsByOffset(int offset);
 

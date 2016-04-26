@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lc.moviehell.dao.UstvMapper">
+    <resultMap id="ustvMap" type="com.lc.moviehell.dao.domain.Ustv"></resultMap>
 
     <insert id="insertUstv" parameterType="com.lc.moviehell.dao.domain.Ustv">
         insert ignore into ustv_detail(id, name, img, intro, hrefs, size, time, createtime, updatetime)
@@ -19,5 +20,20 @@
         where id = #{id};
     </update>
 
+    <select id="getUstvById" parameterType="java.lang.Long" resultType="com.lc.moviehell.dao.domain.Ustv">
+        select * from ustv_detail where id=#{id};
+    </select>
+
+    <select id="getUstvsByOffset" parameterType="java.lang.Integer" resultMap="ustvMap">
+        select * from ustv_detail order by time desc limit 20 offset #{offset};
+    </select>
+
+    <select id="getUstvCount" resultType="java.lang.Integer">
+        select count(id) from ustv_detail;
+    </select>
+
+    <select id="searchUstv" resultMap="ustvMap">
+        select * from ustv_detail where name like #{key} order by time desc;
+    </select>
 
 </mapper>

@@ -5,20 +5,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- 有问题联系 licheng_xd@163.com -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.ico">
 
-    <title>about - Movie Hell</title>
+    <title>Movie Hell</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="css/jumbotron-narrow.css">
-    <script src="js/jquery.min.js"/>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/movie.js"></script>
+    <script src="js/Base64.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -29,10 +31,18 @@
         ga('send', 'pageview');
 
     </script>
-    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?2a79b8f2c726d310f748aca10af76b0f";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 
-<body>
+<body onload="initUstv()">
 
 <div class="container">
     <div class="header clearfix">
@@ -45,14 +55,31 @@
         </nav>
         <h3 class="text-muted">Movie Hell</h3>
     </div>
+    <div class="row">
+        <div class="col-lg-6" style="width: 100%">
+            <div class="input-group">
+                <input type="text" id="search_key" class="form-control" onkeypress="searchInput()" placeholder="Search Movie ...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" onclick="searchMovie()" type="button">搜索</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <br/>
+    <div class="list-group" id="ustv_list">
+        <a class="list-group-item active">最近更新</a>
+    </div>
 
-    <p>主页：<a href="http://lchml.com">lc's blog</a></p>
-    <p>邮箱：<a>licheng_xd@163.com</a></p>
+    <nav>
+        <ul class="pagination" id="ustv_pages">
+        </ul>
+    </nav>
+
     <footer class="footer">
         <p>&copy; LC 2016</p>
     </footer>
 
 </div> <!-- /container -->
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256273064'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256273064%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+
 </body>
 </html>

@@ -8,6 +8,10 @@ function init() {
     getPageCount();
 }
 
+function initUstv() {
+    getUstvPageCount();
+}
+
 function gotoPage(offset) {
     if (offset > pageCount - 1) offset = pageCount - 1;
     if (offset < 0) offset = 0;
@@ -59,6 +63,57 @@ function gotoPage(offset) {
     }
 }
 
+function gotoUstvPage(offset) {
+    if (offset > pageCount - 1) offset = pageCount - 1;
+    if (offset < 0) offset = 0;
+    pageOffset = offset;
+
+    $.ajax({
+        type: 'GET',
+        url: "ustv/page/" + (offset * 20),
+        beforeSend: function(XMLHttpRequest){
+        },
+        success: function(data, textStatus){
+            //console.log(data);
+            var list = document.getElementById("ustv_list");
+            list.innerHTML = "<a class=\"list-group-item active\">最近更新</a>";
+            var resp = eval("(" + data + ")");
+            if (resp["code"] == 200) {
+                var tvs = resp["obj"];
+                for (var idx in tvs) {
+                    var tv = eval("(" + tvs[idx] + ")");
+                    list.innerHTML += "<a class=\"list-group-item cursor\" onclick=\"get_ustv(" + tv["id"] + ")\">" + tv["name"] + "<label style=\"float:right;font-weight:normal;\">" + tv["time"] + "</label></a>";
+                }
+            } else {
+                list.innerHTML += "<a class=\"list-group-item\">暂无数据</a>";
+            }
+
+        },
+        complete: function(XMLHttpRequest, textStatus){
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            console.error();
+        }
+    });
+
+    if (pageCount > 0) {
+        var start = pageOffset - 2;
+        if (start < 0) start = 0;
+        var end = start + 5;
+        if (end > pageCount) end = pageCount;
+        var pages = document.getElementById("ustv_pages");
+        pages.innerHTML = "<li><a class='cursor' onclick=\"gotoUstvPage(" + (pageOffset - 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+        for (var i = start; i < end; i++) {
+            if (i == pageOffset) {
+                pages.innerHTML += "<li class=\"active\"><a onclick=\"gotoUstvPage(" + i + ")\">" + (i + 1) + "</a></li>"
+            } else {
+                pages.innerHTML += "<li><a class='cursor' onclick=\"gotoUstvPage(" + i + ")\">" + (i + 1) + "</a></li>"
+            }
+        }
+        pages.innerHTML += "<li><a class='cursor' onclick=\"gotoUstvPage(" + (pageOffset + 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+    }
+}
+
 function getPageCount() {
     $.ajax({
         type: 'GET',
@@ -81,9 +136,36 @@ function getPageCount() {
     });
 }
 
+function getUstvPageCount() {
+    $.ajax({
+        type: 'GET',
+        url: "ustv/pages",
+        beforeSend: function(XMLHttpRequest){
+        },
+        success: function(data, textStatus){
+            //console.log(data);
+            var resp = eval("(" + data + ")");
+            if (resp["code"] == 200) {
+                pageCount = resp["obj"];
+                gotoUstvPage(0);
+            }
+        },
+        complete: function(XMLHttpRequest, textStatus){
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            console.error();
+        }
+    });
+}
+
 function get_movie(id) {
     //console.log("movie: " + id);
     window.open("/movie/" + id);
+}
+
+function get_ustv(id) {
+    //console.log("movie: " + id);
+    window.open("/ustv/view/" + id);
 }
 
 function searchMovie() {

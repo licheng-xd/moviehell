@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.alibaba.fastjson.JSONArray" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -51,21 +52,31 @@
   <div class="jumbotron">
     <h3 class="title"><%=request.getAttribute("title")%></h3>
     <div class="imagediv"><img class="image" src="<%=request.getAttribute("img")%>"/></div>
-    <a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣电影</a>
+    <%--<a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣电影</a>--%>
     <p class="intro"><%=request.getAttribute("intro").toString().replace("\r\n",
             "<br/>")%></p>
 
     <!--<p><a class="btn btn-info" href="" role="button">下载地址</a></p>-->
-    <button type="button" class="btn btn-default btn-lg" onclick="show_download()">
+    <button type="button" class="btn btn-default btn-lg" onclick="show_ustv_download()">
       <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span> 下载地址
     </button>
     <br/><br/>
-    <a id="download" style="visibility: hidden;font-size: 12px; display: block;"><%=request.getAttribute("href")%>
-    <br><label>注：将上面的链接复制到迅雷中进行下载。</label></a>
+    <div id="ustv_download" style="visibility: hidden;font-size: 12px; display: block;">
+      <%
+        JSONArray hrefs = (JSONArray) request.getAttribute("hrefs");
+        for (Object href1 : hrefs) {
+          String href = (String) href1;
+      %>
+      <a><%=href%></a><br/>
+      <%
+        }
+      %>
+    <br><label>注：将上面的链接复制到迅雷中进行下载。</label>
+    </div>
   </div>
 
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="<%=request.getAttribute("id")%>" data-title="<%=request.getAttribute("title")%>" data-url="http://www.moviehell.net/movie/<%=request.getAttribute("id")%>"></div>
+  <div class="ds-thread" data-thread-key="<%=request.getAttribute("id")%>" data-title="<%=request.getAttribute("title")%>" data-url="http://www.moviehell.net/ustv/view/<%=request.getAttribute("id")%>"></div>
   <!-- 多说评论框 end -->
 
   <footer class="footer">
@@ -75,8 +86,8 @@
 </div> <!-- /container -->
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256273064'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256273064%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 <script>
-function show_download() {
-  document.getElementById("download").style.visibility = "visible";
+function show_ustv_download() {
+  document.getElementById("ustv_download").style.visibility = "visible";
 }
 </script>
 

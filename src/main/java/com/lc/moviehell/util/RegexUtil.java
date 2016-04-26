@@ -4,6 +4,8 @@ import java.util.regex.Pattern;
 
 public class RegexUtil {
 
+    public static final Pattern timePattern = Pattern.compile("(\\d{4}[-]\\d{2}[-]\\d{2})");
+
     private static final Pattern fixedPhonePattern = Pattern
         .compile("^(\\+?0*86-?)?(0+)?([0-9]{2,3})?([2-8][0-9]{6,7})([0-9]{1,4})?$");
 
@@ -25,15 +27,6 @@ public class RegexUtil {
     private static final Pattern mobileEmailPattern = Pattern
         .compile("^1[3,4,5,7,8]\\d{9}@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+");
 
-    private static final Pattern yidPattern = Pattern
-        .compile("[a-zA-Z][a-zA-Z0-9_]{5,19}"); // 易信号：以字母开头的字母+数字+下划线，6-20位
-
-    private static final Pattern yidPatternForFindUser = Pattern
-        .compile("[a-zA-Z][a-zA-Z0-9_]{4,19}"); // 易信号：以字母开头的字母+数字+下划线，5-20位
-
-    private static final Pattern ecpidPattern = Pattern
-        .compile(".+@ecplive\\.com");
-    
     private static final String ipDigitPattern = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)";
 
     private static final Pattern accidPattern = Pattern
@@ -80,18 +73,6 @@ public class RegexUtil {
 
     public static boolean isMobileEmail(String str) {
         return mobileEmailPattern.matcher(str).matches();
-    }
-
-    public static boolean isYid(String str) {
-        return yidPattern.matcher(str).matches();
-    }
-
-    public static boolean isYidForFindUser(String str) {
-        return yidPatternForFindUser.matcher(str).matches();
-    }
-
-    public static boolean isEcpid(String str) {
-        return ecpidPattern.matcher(str).matches();
     }
 
     public static boolean isInternalIp(String str) {
