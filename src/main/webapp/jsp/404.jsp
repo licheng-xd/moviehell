@@ -43,7 +43,7 @@
 </head>
 
 <body>
-
+<a class="moviehell-icon" href="http://www.lchml.com" target="_blank">站长主页</a>
 <div class="container" id="container">
   <div class="header clearfix">
     <nav>
