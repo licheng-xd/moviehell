@@ -14,9 +14,9 @@ import java.util.regex.Matcher;
 /**
  * Created by lc on 15/7/22.
  */
-public class OnceSpider implements PageProcessor {
+public class UstvInitSpider implements PageProcessor {
     private static final Logger logger = LoggerFactory.getLogger(
-        OnceSpider.class);
+        UstvInitSpider.class);
 
     private Site site = Site.me()
         .setRetryTimes(3).setSleepTime(1000).setUseGzip(true);

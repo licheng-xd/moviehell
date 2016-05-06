@@ -13,9 +13,9 @@ import javax.annotation.Resource;
  * Created by lc on 15/8/24.
  */
 @Service
-public class SpiderTask {
+public class MovieTask {
     private static final Logger logger = LoggerFactory.getLogger(
-        SpiderTask.class);
+        MovieTask.class);
 
     @Resource
     private MovieServiceImpl movieService;
@@ -31,7 +31,7 @@ public class SpiderTask {
     }
 
     public static void main(String[] args) {
-        new SpiderTask().run();
+        new MovieTask().run();
     }
 
 }

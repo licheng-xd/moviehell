@@ -10,6 +10,8 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import java.util.List;
 
 /**
+ * 电影爬虫
+ *
  * Created by lc on 15/7/22.
  */
 public class MovieSpider implements PageProcessor {

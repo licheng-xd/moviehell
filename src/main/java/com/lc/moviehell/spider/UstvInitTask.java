@@ -13,18 +13,18 @@ import javax.annotation.Resource;
  * Created by lc on 15/8/24.
  */
 //@Service
-public class OnceTask {
+public class UstvInitTask {
     private static final Logger logger = LoggerFactory.getLogger(
-        OnceTask.class);
+        UstvInitTask.class);
 
     @Resource
     private IUstvService ustvService;
 
 //    @Scheduled(fixedDelay = 5000)
     public void run() {
-        logger.info("start once spider ...");
+        logger.info("start UstvInitTask ...");
         for (int i=1; i<23; i++) {
-            Spider.create(new OnceSpider())
+            Spider.create(new UstvInitSpider())
                 .addUrl("http://www.ygdy8.net/html/tv/oumeitv/list_9_" + i + ".html")
                 .addPipeline(new UstvPipeline(ustvService))
                 .thread(1)
@@ -33,7 +33,7 @@ public class OnceTask {
     }
 
     public void test() {
-        logger.info("start test spider ...");
+        logger.info("start UstvInitTask test ...");
         Spider.create(new UstvSpider())
             .addUrl("http://dytt8.net/html/tv/oumeitv/20150922/49088.html")
             .addPipeline(new UstvPipeline(ustvService))
@@ -42,6 +42,6 @@ public class OnceTask {
     }
 
     public static void main(String[] args) {
-        new OnceTask().test();
+        new UstvInitTask().test();
     }
 }

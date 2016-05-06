@@ -5,12 +5,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.lc.moviehell.bean.SerializableBean;
 
 /**
- * 电影
+ * 纪录片
  *
- * Created by lc on 15/8/19.
+ * Created by lc on 16/5/6.
  */
-public class Movie extends SerializableBean {
-    private Long id;
+public class Documentary extends SerializableBean {
+    private String id;
 
     private String name;
 
@@ -18,17 +18,21 @@ public class Movie extends SerializableBean {
 
     private String intro;
 
-    private String href;
+    private String hrefs;
 
     private String time;
 
+    private String url;
+
     private long createtime;
 
-    public Long getId() {
+    private long updatetime;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -56,12 +60,12 @@ public class Movie extends SerializableBean {
         this.intro = intro;
     }
 
-    public String getHref() {
-        return href;
+    public String getHrefs() {
+        return hrefs;
     }
 
-    public void setHref(String href) {
-        this.href = href;
+    public void setHrefs(String hrefs) {
+        this.hrefs = hrefs;
     }
 
     public String getTime() {
@@ -72,12 +76,28 @@ public class Movie extends SerializableBean {
         this.time = time;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public long getCreatetime() {
         return createtime;
     }
 
     public void setCreatetime(long createtime) {
         this.createtime = createtime;
+    }
+
+    public long getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(long updatetime) {
+        this.updatetime = updatetime;
     }
 
     @Override public String serialize() {

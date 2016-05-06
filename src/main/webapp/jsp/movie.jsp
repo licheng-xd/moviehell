@@ -60,7 +60,7 @@
       <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span> 下载地址
     </button>
     <br/><br/>
-    <a id="download" style="visibility: hidden;font-size: 12px; display: block;"><%=request.getAttribute("href")%>
+    <a id="download" style="visibility: hidden;font-size: 12px; display: block;" href="<%=request.getAttribute("href")%>"><%=request.getAttribute("href")%>
     <br><label>注：将上面的链接复制到迅雷中进行下载。</label></a>
   </div>
 

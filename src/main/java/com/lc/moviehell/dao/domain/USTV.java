@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.lc.moviehell.bean.SerializableBean;
 
 /**
+ * 美剧
+ *
  * Created by lc on 16/4/25.
  */
 public class Ustv extends SerializableBean {
