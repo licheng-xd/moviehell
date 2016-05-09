@@ -2,6 +2,7 @@ package com.lc.moviehell.service.impl;
 
 import com.lc.moviehell.dao.MovieMapper;
 import com.lc.moviehell.dao.domain.Movie;
+import com.lc.moviehell.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -65,7 +66,7 @@ public class MovieServiceImpl {
 
     public List<Movie> search(String key) {
         try {
-            return mapper.searchMovie("%" + key + "%");
+            return mapper.searchMovie(StringUtil.getSearchKey(key));
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return null;

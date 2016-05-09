@@ -3,6 +3,7 @@ package com.lc.moviehell.service.impl;
 import com.lc.moviehell.dao.UstvMapper;
 import com.lc.moviehell.dao.domain.Ustv;
 import com.lc.moviehell.service.IUstvService;
+import com.lc.moviehell.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class UstvServiceImpl implements IUstvService {
 
     @Override public List<Ustv> search(String key) {
         try {
-            return mapper.searchUstv("%" + key + "%");
+            return mapper.searchUstv(StringUtil.getSearchKey(key));
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return null;

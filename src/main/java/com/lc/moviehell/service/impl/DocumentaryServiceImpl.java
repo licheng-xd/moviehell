@@ -3,6 +3,7 @@ package com.lc.moviehell.service.impl;
 import com.lc.moviehell.dao.DocumentaryMapper;
 import com.lc.moviehell.dao.domain.Documentary;
 import com.lc.moviehell.service.IDocumentaryService;
+import com.lc.moviehell.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,7 @@ public class DocumentaryServiceImpl implements IDocumentaryService {
 
     @Override public List<Documentary> search(String key) {
         try {
-            return mapper.searchDocumentary(key);
+            return mapper.searchDocumentary(StringUtil.getSearchKey(key));
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return null;
