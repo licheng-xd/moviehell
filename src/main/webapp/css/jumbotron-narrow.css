@@ -170,7 +170,7 @@ body {
 }
 
 .jandan-icon {
-    line-height:38px; float:right; padding:2px 8px; color:#000; font-size:18px;  background:#EBE700;
+    line-height:38px; float:right; padding:2px 8px; color:#585858!important; font-size:18px;  background:#F6E600;
     /*position:fixed;*/
     position:fixed; right:0%; top:40%;
     transition:All 0.4s ease-in-out;
