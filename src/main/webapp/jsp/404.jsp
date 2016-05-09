@@ -44,6 +44,7 @@
 
 <body>
 <a class="moviehell-icon" href="http://www.lchml.com" target="_blank">站长主页</a>
+<a class="jandan-icon" href="http://jandan.net" target="_blank">煎蛋网</a>
 <div class="container" id="container">
   <div class="header clearfix">
     <nav>
