@@ -144,6 +144,7 @@ body {
 
 .moviehell-icon {
     line-height:38px; float:right; padding:2px 8px; color:#fff; font-size:18px;  background:#00BFFF;
+    z-index: 1000;
     /*position:fixed;*/
     position:fixed; right:0%; top:50%;
     transition:All 0.4s ease-in-out;
@@ -171,6 +172,7 @@ body {
 
 .jandan-icon {
     line-height:38px; float:right; padding:2px 8px; color:#585858!important; font-size:18px;  background:#F6E600;
+    z-index: 1000;
     /*position:fixed;*/
     position:fixed; right:0%; top:40%;
     transition:All 0.4s ease-in-out;
