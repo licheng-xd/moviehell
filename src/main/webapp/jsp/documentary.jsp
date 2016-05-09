@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.alibaba.fastjson.JSONArray" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -8,14 +10,14 @@
   <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../img/favicon.ico">
+  <link rel="icon" href="../../img/favicon.ico">
 
   <title><%=request.getAttribute("title")%> - Movie Hell</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="../css/jumbotron-narrow.css">
+  <link rel="stylesheet" href="../../css/jumbotron-narrow.css">
 
   <script src="/js/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
@@ -52,21 +54,33 @@
   <div class="jumbotron">
     <h3 class="title"><%=request.getAttribute("title")%></h3>
     <div class="imagediv"><img class="image" src="<%=request.getAttribute("img")%>"/></div>
-    <a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣电影</a>
+    <%--<a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣电影</a>--%>
     <p class="intro"><%=request.getAttribute("intro").toString().replace("\r\n",
             "<br/>")%></p>
 
     <!--<p><a class="btn btn-info" href="" role="button">下载地址</a></p>-->
-    <button type="button" class="btn btn-default btn-lg" onclick="show_download()">
+    <button type="button" class="btn btn-default btn-lg" onclick="show_documentary_download()">
       <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span> 下载地址
     </button>
     <br/><br/>
-    <a id="download" style="visibility: hidden;font-size: 12px; display: block;" href="<%=request.getAttribute("href")%>"><%=request.getAttribute("href")%>
-    <br><label>注：将上面的链接复制到迅雷中进行下载。</label></a>
+    <div id="documentary_download" style="font-size: 12px; display: block;">
+      <%
+        JSONArray hrefs = JSONArray.parseArray((String)request.getAttribute("hrefs"));
+        Iterator<Object> iter = hrefs.iterator();
+        while (iter.hasNext()) {
+          String name = (String) iter.next();
+          String href = (String) iter.next();
+      %>
+      <a href="<%=href%>"><%=name%></a><br/>
+      <%
+        }
+      %>
+    <br><label>注：右键复制链接地址到迅雷中进行下载。</label>
+    </div>
   </div>
 
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="<%=request.getAttribute("id")%>" data-title="<%=request.getAttribute("title")%>" data-url="http://www.moviehell.net/movie/<%=request.getAttribute("id")%>"></div>
+  <div class="ds-thread" data-thread-key="<%=request.getAttribute("id")%>" data-title="<%=request.getAttribute("title")%>" data-url="http://www.moviehell.net/documentary/view/<%=request.getAttribute("id")%>"></div>
   <!-- 多说评论框 end -->
 
   <footer class="footer">
@@ -76,8 +90,8 @@
 </div> <!-- /container -->
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256273064'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256273064%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
 <script>
-function show_download() {
-  document.getElementById("download").style.visibility = "visible";
+function show_documentary_download() {
+  document.getElementById("documentary_download").style.visibility = "visible";
 }
 </script>
 
@@ -88,7 +102,7 @@ function show_download() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
 //    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.src = '../js/embed.js'
+    ds.src = '../../js/embed.js'
     ds.charset = 'UTF-8';
     (document.getElementsByTagName('head')[0]
     || document.getElementsByTagName('body')[0]).appendChild(ds);

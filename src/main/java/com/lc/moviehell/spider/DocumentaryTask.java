@@ -19,7 +19,7 @@ public class DocumentaryTask {
     @Resource
     private IDocumentaryService documentaryService;
 
-    @Scheduled(cron = "0 */30 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void run() {
         logger.info("start DocumentaryInitTask ...");
         Spider.create(new DocumentarySpider())

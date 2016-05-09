@@ -3,8 +3,10 @@ package com.lc.moviehell.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.lc.moviehell.bean.RespCode;
 import com.lc.moviehell.bean.RespBody;
+import com.lc.moviehell.dao.domain.Documentary;
 import com.lc.moviehell.dao.domain.Movie;
 import com.lc.moviehell.dao.domain.Ustv;
+import com.lc.moviehell.service.IDocumentaryService;
 import com.lc.moviehell.service.IUstvService;
 import com.lc.moviehell.service.impl.MovieServiceImpl;
 import org.apache.commons.codec.binary.Base64;
@@ -36,6 +38,9 @@ public class MovieController {
 
     @Resource
     private IUstvService ustvService;
+
+    @Resource
+    private IDocumentaryService documentaryService;
 
     @ResponseBody
     @RequestMapping(value = "/page/{offset}", method = RequestMethod.GET)
@@ -89,6 +94,7 @@ public class MovieController {
         }
         List<Movie> movies = new ArrayList<Movie>();
         List<Ustv> ustvs = new ArrayList<Ustv>();
+        List<Documentary> docs = new ArrayList<Documentary>();
         if (key.length() > 0) {
             movies = movieService.search(key);
             if (movies == null) {
@@ -98,9 +104,14 @@ public class MovieController {
             if (ustvs == null) {
                 ustvs = new ArrayList<Ustv>();
             }
+            docs = documentaryService.search(key);
+            if (docs == null) {
+                docs = new ArrayList<Documentary>();
+            }
         }
         request.setAttribute("result", movies);
         request.setAttribute("ustvresult", ustvs);
+        request.setAttribute("docresult", docs);
         return "search";
     }
 

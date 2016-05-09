@@ -20,7 +20,7 @@ public class MovieTask {
     @Resource
     private MovieServiceImpl movieService;
 
-    @Scheduled(cron = "0 */20 * * * ?")
+    @Scheduled(cron = "0 0/20 * * * ?")
     public void run() {
         logger.info("start movie spider ...");
         Spider.create(new MovieSpider(movieService))

@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="/css/jumbotron-narrow.css">
+  <link rel="stylesheet" href="../css/jumbotron-narrow.css">
 
   <script src="/js/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
@@ -57,7 +57,7 @@
     <h3 class="text-muted">Movie Hell</h3>
   </div>
 
-  <h1 align="center">404</h1>
+  <h1 align="center">掉沟里了</h1>
 
   <div align="center">
     <canvas id="q" height="350">...</canvas><br/><br/>

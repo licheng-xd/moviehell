@@ -20,7 +20,7 @@ public class UstvTask {
     @Resource
     private UstvServiceImpl ustvService;
 
-    @Scheduled(cron = "0 */20 * * * ?")
+    @Scheduled(cron = "0 0/20 * * * ?")
     public void run() {
         logger.info("start ustv spider ...");
         Spider.create(new UstvSpider())

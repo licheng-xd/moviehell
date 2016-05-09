@@ -1,6 +1,7 @@
 <%@ page import="com.lc.moviehell.dao.domain.Movie" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.lc.moviehell.dao.domain.Ustv" %>
+<%@ page import="com.lc.moviehell.dao.domain.Documentary" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -48,6 +49,7 @@
       <ul class="nav nav-pills pull-right">
         <li role="presentation"><a href="/index.html">电影</a></li>
         <li role="presentation"><a href="/ustv.html">美剧</a></li>
+        <li role="presentation"><a href="/documentary.html">纪录片</a></li>
         <li role="presentation"><a href="/about.html">关于</a></li>
       </ul>
     </nav>
@@ -71,7 +73,8 @@
     <%
       List<Movie> movies = (List<Movie>) request.getAttribute("result");
       List<Ustv> ustvs = (List<Ustv>) request.getAttribute("ustvresult");
-      if (movies.size() == 0 && ustvs.size() == 0) {
+      List<Documentary> docs = (List<Documentary>) request.getAttribute("docresult");
+      if (movies.size() == 0 && ustvs.size() == 0 && docs.size() == 0) {
     %>
     <a class="list-group-item">不存在</a>
     <canvas id="q" height="350px">...</canvas><br><br>
@@ -85,6 +88,11 @@
         for (Ustv tv : ustvs) {
     %>
           <a class="list-group-item cursor" onclick="get_ustv(<%=tv.getId()%>)">[美剧] &nbsp;&nbsp;<%=tv.getName()%><label style="float:right;font-weight:normal;"><%=tv.getTime()%></label></a>
+    <%
+        }
+        for (Documentary docu : docs) {
+    %>
+          <a class="list-group-item cursor" onclick="get_documentary(<%=docu.getId()%>)">[纪录片] &nbsp;&nbsp;<%=docu.getName()%><label style="float:right;font-weight:normal;"><%=docu.getTime()%></label></a>
     <%
         }
       }

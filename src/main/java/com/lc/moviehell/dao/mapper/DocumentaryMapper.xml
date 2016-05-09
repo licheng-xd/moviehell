@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lc.moviehell.dao.UstvMapper">
+<mapper namespace="com.lc.moviehell.dao.DocumentaryMapper">
     <resultMap id="docMap" type="com.lc.moviehell.dao.domain.Documentary"></resultMap>
 
     <insert id="insertDocumentary" parameterType="com.lc.moviehell.dao.domain.Documentary">
@@ -22,8 +22,20 @@
         where id = #{id};
     </update>
 
-    <select id="getById" parameterType="java.lang.String" resultType="com.lc.moviehell.dao.domain.Documentary">
+    <select id="getDocumentaryById" parameterType="java.lang.String" resultType="com.lc.moviehell.dao.domain.Documentary">
         select * from documentary_detail where id=#{id};
+    </select>
+
+    <select id="getDocumentaryByOffset" parameterType="java.lang.Integer" resultMap="docMap">
+        select * from documentary_detail order by time desc limit 20 offset #{offset};
+    </select>
+
+    <select id="getDocumentaryCount" resultType="java.lang.Integer">
+        select count(id) from documentary_detail;
+    </select>
+
+    <select id="searchDocumentary" resultMap="docMap">
+        select * from documentary_detail where name like #{key} order by time desc;
     </select>
 
 </mapper>

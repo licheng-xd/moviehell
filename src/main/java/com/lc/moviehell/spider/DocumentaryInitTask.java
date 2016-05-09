@@ -3,8 +3,6 @@ package com.lc.moviehell.spider;
 import com.lc.moviehell.service.IDocumentaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
@@ -12,7 +10,7 @@ import javax.annotation.Resource;
 /**
  * Created by lc on 16/5/6.
  */
-@Service
+//@Service
 public class DocumentaryInitTask {
     private static final Logger logger = LoggerFactory.getLogger(
         DocumentaryInitTask.class);
@@ -20,7 +18,7 @@ public class DocumentaryInitTask {
     @Resource
     private IDocumentaryService documentaryService;
 
-    @Scheduled(fixedDelay = 5000)
+//    @Scheduled(fixedDelay = 5000)
     public void run() {
         logger.info("start DocumentaryInitTask ...");
         Spider.create(new DocumentarySpider())

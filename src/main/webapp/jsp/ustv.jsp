@@ -43,6 +43,7 @@
       <ul class="nav nav-pills pull-right">
         <li role="presentation"><a href="/index.html">电影</a></li>
         <li role="presentation"><a href="/ustv.html">美剧</a></li>
+        <li role="presentation"><a href="/documentary.html">纪录片</a></li>
         <li role="presentation"><a href="/about.html">关于</a></li>
       </ul>
     </nav>
