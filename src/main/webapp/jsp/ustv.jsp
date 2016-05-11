@@ -70,7 +70,7 @@
         for (Object href1 : hrefs) {
           String href = (String) href1;
       %>
-      <a href="<%=href%>"><%=href%></a><br/>
+      <a><%=href%></a><br/>
       <%
         }
       %>
