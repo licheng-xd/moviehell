@@ -171,7 +171,7 @@ body {
 }
 
 .jandan-icon {
-    line-height:38px; float:right; padding:2px 8px; color:#585858!important; font-size:18px;  background:#F6E600;
+    line-height:38px; float:right; padding:2px 8px; color:#fff; font-size:18px;  background:#F6E600;
     z-index: 1000;
     /*position:fixed;*/
     position:fixed; right:0%; top:40%;
@@ -194,6 +194,33 @@ body {
     text-decoration:none;
 }
 .jandan-icon:visited
+{
+    color:#fff;
+    text-decoration:none;
+}
+.lofter-icon {
+    line-height:38px; float:right; padding:2px 8px; color:#fff; font-size:18px;  background:#088A85;
+    z-index: 1000;
+    /*position:fixed;*/
+    position:fixed; right:0%; top:60%;
+    transition:All 0.4s ease-in-out;
+    -webkit-transition:All 0.4s ease-in-out;
+    -moz-transition:All 0.4s ease-in-out;
+    -o-transition:All 0.4s ease-in-out;
+}
+.lofter-icon:hover {
+    text-decoration:none;
+    transform:rotate(360deg);
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+.lofter-icon:link
+{
+    text-decoration:none;
+}
+.lofter-icon:visited
 {
     color:#fff;
     text-decoration:none;

@@ -37,6 +37,7 @@
 <body>
 <a class="moviehell-icon" href="http://www.lchml.com" target="_blank">站长主页</a>
 <a class="jandan-icon" href="http://jandan.net" target="_blank">煎蛋网</a>
+<a class="lofter-icon" href="http://licheng-xd.lofter.com/" target="_blank">Lofter摄影</a>
 <div class="container">
   <div class="header clearfix">
     <nav>
@@ -62,8 +63,10 @@
       <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span> 下载地址
     </button>
     <br/><br/>
-    <a id="download" style="visibility: hidden;font-size: 12px; display: block;" href="<%=request.getAttribute("href")%>"><%=request.getAttribute("href")%>
-    <br><label>注：将上面的链接复制到迅雷中进行下载。</label></a>
+    <div id="download" style="font-size: 12px; display: block;">
+      <a><%=request.getAttribute("href")%></a><br/>
+      <br/><label>注：将上面的链接复制到迅雷中进行下载。</label>
+    </div>
   </div>
 
   <!-- 多说评论框 start -->

@@ -38,6 +38,7 @@
 <body>
 <a class="moviehell-icon" href="http://www.lchml.com" target="_blank">站长主页</a>
 <a class="jandan-icon" href="http://jandan.net" target="_blank">煎蛋网</a>
+<a class="lofter-icon" href="http://licheng-xd.lofter.com/" target="_blank">Lofter摄影</a>
 <div class="container">
   <div class="header clearfix">
     <nav>
