@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.lc.moviehell.dao.domain.Ustv" %>
 <%@ page import="com.lc.moviehell.dao.domain.Documentary" %>
+<%@ page import="com.lc.moviehell.dao.domain.P1080" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -50,6 +51,7 @@
     <nav>
       <ul class="nav nav-pills pull-right">
         <li role="presentation"><a href="/index.html">电影</a></li>
+        <li role="presentation"><a href="/p1080.html">1080P</a></li>
         <li role="presentation"><a href="/ustv.html">美剧</a></li>
         <li role="presentation"><a href="/documentary.html">纪录片</a></li>
         <li role="presentation"><a href="/about.html">关于</a></li>
@@ -74,9 +76,10 @@
     <a class="list-group-item active">搜索结果</a>
     <%
       List<Movie> movies = (List<Movie>) request.getAttribute("result");
+      List<P1080> p1080s = (List<P1080>) request.getAttribute("p1080result");
       List<Ustv> ustvs = (List<Ustv>) request.getAttribute("ustvresult");
       List<Documentary> docs = (List<Documentary>) request.getAttribute("docresult");
-      if (movies.size() == 0 && ustvs.size() == 0 && docs.size() == 0) {
+      if (movies.size() == 0 && ustvs.size() == 0 && docs.size() == 0 && p1080s.size() == 0) {
     %>
     <a class="list-group-item">不存在</a>
     <canvas id="q" height="350px">...</canvas><br><br>
@@ -85,6 +88,11 @@
         for (Movie m : movies) {
     %>
           <a class="list-group-item cursor" onclick="get_movie(<%=m.getId()%>)">[电影] &nbsp;&nbsp;<%=m.getName()%><label style="float:right;font-weight:normal;"><%=m.getTime()%></label></a>
+    <%
+        }
+        for (P1080 p1080 : p1080s) {
+    %>
+          <a class="list-group-item cursor" onclick="get_p1080(<%=p1080.getId()%>)">[高清] &nbsp;&nbsp;<%=p1080.getName()%><label style="float:right;font-weight:normal;"><%=p1080.getTime()%></label></a>
     <%
         }
         for (Ustv tv : ustvs) {

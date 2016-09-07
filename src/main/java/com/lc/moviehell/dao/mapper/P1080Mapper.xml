@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lc.moviehell.dao.P1080Mapper">
+    <resultMap id="p1080Map" type="com.lc.moviehell.dao.domain.P1080"></resultMap>
+
+    <insert id="insertP1080" parameterType="com.lc.moviehell.dao.domain.P1080">
+        insert ignore into p1080_detail(id, name, img, intro, href, time, createtime, updatetime)
+        values (#{id}, #{name}, #{img}, #{intro}, #{href}, #{time}, #{createtime}, #{updatetime});
+    </insert>
+
+    <select id="getP1080ById" parameterType="java.lang.String" resultType="com.lc.moviehell.dao.domain.P1080">
+        select * from p1080_detail where id=#{id};
+    </select>
+
+    <select id="getP1080sByOffset" parameterType="java.lang.Integer" resultMap="p1080Map">
+        select * from p1080_detail order by time desc limit 20 offset #{offset};
+    </select>
+
+    <select id="getP1080Count" resultType="java.lang.Integer">
+        select count(id) from p1080_detail;
+    </select>
+
+    <select id="searchP1080" resultMap="p1080Map">
+        select * from p1080_detail where name like #{key} order by time desc;
+    </select>
+
+</mapper>

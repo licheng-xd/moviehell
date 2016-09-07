@@ -16,6 +16,10 @@ function initDocumentary() {
     getDocumentaryPageCount();
 }
 
+function initP1080() {
+    getP1080PageCount();
+}
+
 function gotoPage(offset) {
     if (offset > pageCount - 1) offset = pageCount - 1;
     if (offset < 0) offset = 0;
@@ -170,6 +174,59 @@ function gotoDocumentaryPage(offset) {
     }
 }
 
+
+
+function gotoP1080Page(offset) {
+    if (offset > pageCount - 1) offset = pageCount - 1;
+    if (offset < 0) offset = 0;
+    pageOffset = offset;
+
+    $.ajax({
+        type: 'GET',
+        url: "p1080/page/" + (offset * 20),
+        beforeSend: function(XMLHttpRequest){
+        },
+        success: function(data, textStatus){
+            //console.log(data);
+            var list = document.getElementById("p1080_list");
+            list.innerHTML = "<a class=\"list-group-item active\">最近更新</a>";
+            var resp = eval("(" + data + ")");
+            if (resp["code"] == 200) {
+                var docs = resp["obj"];
+                for (var idx in docs) {
+                    var docu = eval("(" + docs[idx] + ")");
+                    list.innerHTML += "<a class=\"list-group-item cursor\" onclick=\"get_p1080(\'" + docu["id"] + "\')\">" + docu["name"] + "<label style=\"float:right;font-weight:normal;\">" + docu["time"] + "</label></a>";
+                }
+            } else {
+                list.innerHTML += "<a class=\"list-group-item\">暂无数据</a>";
+            }
+
+        },
+        complete: function(XMLHttpRequest, textStatus){
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            console.error();
+        }
+    });
+
+    if (pageCount > 0) {
+        var start = pageOffset - 2;
+        if (start < 0) start = 0;
+        var end = start + 5;
+        if (end > pageCount) end = pageCount;
+        var pages = document.getElementById("p1080_pages");
+        pages.innerHTML = "<li><a class='cursor' onclick=\"gotoP1080Page(" + (pageOffset - 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+        for (var i = start; i < end; i++) {
+            if (i == pageOffset) {
+                pages.innerHTML += "<li class=\"active\"><a onclick=\"gotoP1080Page(" + i + ")\">" + (i + 1) + "</a></li>"
+            } else {
+                pages.innerHTML += "<li><a class='cursor' onclick=\"gotoP1080Page(" + i + ")\">" + (i + 1) + "</a></li>"
+            }
+        }
+        pages.innerHTML += "<li><a class='cursor' onclick=\"gotoP1080Page(" + (pageOffset + 1) + ")\" aria-label=\"Previous\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+    }
+}
+
 function getPageCount() {
     $.ajax({
         type: 'GET',
@@ -236,6 +293,28 @@ function getDocumentaryPageCount() {
     });
 }
 
+function getP1080PageCount() {
+    $.ajax({
+        type: 'GET',
+        url: "p1080/pages",
+        beforeSend: function(XMLHttpRequest){
+        },
+        success: function(data, textStatus){
+            //console.log(data);
+            var resp = eval("(" + data + ")");
+            if (resp["code"] == 200) {
+                pageCount = resp["obj"];
+                gotoP1080Page(0);
+            }
+        },
+        complete: function(XMLHttpRequest, textStatus){
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            console.error();
+        }
+    });
+}
+
 
 function get_movie(id) {
     window.open("/movie/" + id);
@@ -247,6 +326,10 @@ function get_ustv(id) {
 
 function get_documentary(id) {
     window.open("/documentary/view/" + id);
+}
+
+function get_p1080(id) {
+    window.open("/p1080/view/" + id);
 }
 
 function searchMovie() {

@@ -57,7 +57,7 @@ public class UstvPipeline implements Pipeline {
                 ustv.setSize(hrefs.size());
                 ustv.setIntro(introduce);
                 ustv.setTime(time);
-                ustv.setCreatetime(now);
+                ustv.setUpdatetime(now);
                 ustv.setCreatetime(now);
                 ustvService.insertUstv(ustv);
                 logger.info("create new ustv {}, {}", id, name);

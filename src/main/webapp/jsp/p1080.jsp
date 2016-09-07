@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.alibaba.fastjson.JSONArray" %>
-<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -62,28 +61,17 @@
             "<br/>")%></p>
 
     <!--<p><a class="btn btn-info" href="" role="button">下载地址</a></p>-->
-    <button type="button" class="btn btn-default btn-lg" onclick="show_documentary_download()">
+    <button type="button" class="btn btn-default btn-lg">
       <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span> 下载地址
     </button>
     <br/><br/>
-    <div id="documentary_download" style="font-size: 12px; display: block;">
-      <%
-        JSONArray hrefs = JSONArray.parseArray((String)request.getAttribute("hrefs"));
-        Iterator<Object> iter = hrefs.iterator();
-        while (iter.hasNext()) {
-          String name = (String) iter.next();
-          String href = (String) iter.next();
-      %>
-      <a href="<%=href%>"><%=name%></a><br/>
-      <%
-        }
-      %>
-    <br><label>注：右键复制链接地址到迅雷中进行下载。</label>
+    <div id="p1080_download" style="font-size: 12px; display: block;">
+      <a><%=request.getAttribute("href")%></a><br/>
     </div>
   </div>
 
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="<%=request.getAttribute("id")%>" data-title="<%=request.getAttribute("title")%>" data-url="http://www.moviehell.net/documentary/view/<%=request.getAttribute("id")%>"></div>
+  <div class="ds-thread" data-thread-key="<%=request.getAttribute("id")%>" data-title="<%=request.getAttribute("title")%>" data-url="http://www.moviehell.net/p1080/view/<%=request.getAttribute("id")%>"></div>
   <!-- 多说评论框 end -->
 
   <footer class="footer">
@@ -92,11 +80,6 @@
 
 </div> <!-- /container -->
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256273064'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256273064%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
-<script>
-function show_documentary_download() {
-  document.getElementById("documentary_download").style.visibility = "visible";
-}
-</script>
 
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
