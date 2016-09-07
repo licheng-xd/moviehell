@@ -3,7 +3,6 @@ package com.lc.moviehell.spider;
 import com.lc.moviehell.service.IP1080Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
@@ -20,7 +19,7 @@ public class P1080Task {
     @Resource
     private IP1080Service p1080Service;
 
-    @Scheduled(cron = "0 0/30 * * * ?")
+//    @Scheduled(cron = "0 0/30 * * * ?")
     public void run() {
         logger.info("start P1080Task ...");
         Spider.create(new P1080Spider())

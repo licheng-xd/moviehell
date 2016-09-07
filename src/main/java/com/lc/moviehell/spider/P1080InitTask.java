@@ -25,12 +25,17 @@ public class P1080InitTask {
     public void run() {
         logger.info("start P1080InitTask ...");
 
-        for (int i=121; i>0; i--) {
-            Spider.create(new DocumentarySpider())
+        for (int i=68; i>1; i--) {
+            Spider.create(new P1080Spider())
                 .addUrl("http://www.mp4ba.com/index.php?page=" + i)
                 .addPipeline(new P1080Pipeline(p1080Service))
                 .thread(1)
                 .run();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
         }
     }
 

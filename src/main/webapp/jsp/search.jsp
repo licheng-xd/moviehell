@@ -92,7 +92,7 @@
         }
         for (P1080 p1080 : p1080s) {
     %>
-          <a class="list-group-item cursor" onclick="get_p1080(<%=p1080.getId()%>)">[高清] &nbsp;&nbsp;<%=p1080.getName()%><label style="float:right;font-weight:normal;"><%=p1080.getTime()%></label></a>
+          <a class="list-group-item cursor" onclick="get_p1080('<%=p1080.getId()%>')">[高清] &nbsp;&nbsp;<%=p1080.getName()%><label style="float:right;font-weight:normal;"><%=p1080.getTime()%></label></a>
     <%
         }
         for (Ustv tv : ustvs) {

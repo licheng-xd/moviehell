@@ -81,7 +81,7 @@ public class P1080Spider implements PageProcessor {
 
     public static void main(String[] args) {
         Spider.create(new P1080Spider())
-            .addUrl("http://www.mp4ba.com/show.php?hash=72311c7b77fea440f28343321733b831d7054bda")
+            .addUrl("http://www.mp4ba.com/index.php?page=2s")
             .addPipeline(new P1080Pipeline(new P1080ServiceImpl()))
             .thread(1)
             .run();
