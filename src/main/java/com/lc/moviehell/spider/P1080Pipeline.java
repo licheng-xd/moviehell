@@ -8,9 +8,6 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Created by lc on 16/9/6.
  */
@@ -23,8 +20,6 @@ public class P1080Pipeline implements Pipeline {
         this.p1080Service = p1080Service;
     }
 
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
     @Override
     public void process(ResultItems result, Task task) {
         String name = result.get("name");
@@ -32,6 +27,7 @@ public class P1080Pipeline implements Pipeline {
         String href = result.get("href");
         String introduce = result.get("introduce");
         String url = result.get("url");
+        String time = result.get("time");
         if (img == null) {
             img = "http://nos-yx.netease.com/yixinpublic/moviehell-404.jpg";
         }
@@ -54,13 +50,13 @@ public class P1080Pipeline implements Pipeline {
                 p1080.setImg(img);
                 p1080.setHref(href);
                 p1080.setIntro(introduce);
-                p1080.setTime(format.format(new Date()));
+                p1080.setTime(time);
                 p1080.setUpdatetime(now);
                 p1080.setCreatetime(now);
                 p1080Service.insertP1080(p1080);
-                logger.info("create new p1080 {}, {}", id, name);
+                logger.info("create new p1080: {} {}", id, name);
             } else {
-                logger.debug("{} {} exist", id, name);
+                logger.info("p1080 exist: {} {} ", id, name);
             }
         }
     }

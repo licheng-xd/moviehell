@@ -9,6 +9,8 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +23,8 @@ public class P1080Spider implements PageProcessor {
         .setRetryTimes(3).setSleepTime(1000).setUseGzip(true);
 
     private static String suffix = "- 高清Mp4吧-免费高清电影资源下载 - Powered by Mp4Ba.Com";
+
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public void process(Page page) {
@@ -39,9 +43,6 @@ public class P1080Spider implements PageProcessor {
             String name = title.substring(0, title.length() - suffix.length());
 
             String image = html.xpath("//div[@class='intro']/img/@src").toString();
-            if (image == null) {
-
-            }
 
             List<String> introduces = html.xpath("//div[@class='intro']").all();
             StringBuilder sb = new StringBuilder();
@@ -53,7 +54,17 @@ public class P1080Spider implements PageProcessor {
 
             String href = html.xpath("//a[@id='download']/@href").get();
 
+            String time = format.format(new Date());
+            List<String> basics = html.xpath("//div[@class='basic_info']/p/text()").all();
+            for (String basic : basics) {
+                if (basic.contains("发布时间")) {
+                    time = basic.split(" ")[1];
+                    break;
+                }
+            }
+
             page.putField("name", name);
+            page.putField("time", time);
             page.putField("img", image);
             page.putField("introduce", introduce);
             page.putField("url", url);

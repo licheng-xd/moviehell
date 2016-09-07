@@ -25,7 +25,7 @@ public class P1080InitTask {
     public void run() {
         logger.info("start P1080InitTask ...");
 
-        for (int i=1; i<122; i++) {
+        for (int i=121; i>0; i--) {
             Spider.create(new DocumentarySpider())
                 .addUrl("http://www.mp4ba.com/index.php?page=" + i)
                 .addPipeline(new P1080Pipeline(p1080Service))
