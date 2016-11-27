@@ -32,7 +32,7 @@ public class MovieInitTask {
                 .thread(1)
                 .run();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(60000);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage(), e);
             }

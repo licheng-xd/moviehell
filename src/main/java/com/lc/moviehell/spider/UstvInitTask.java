@@ -32,6 +32,12 @@ public class UstvInitTask {
                 .thread(1)
                 .run();
         }
+
+        try {
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage(), e);
+        }
     }
 
 }

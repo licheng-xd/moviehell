@@ -27,7 +27,7 @@ public class MovieSpider implements PageProcessor {
     }
 
     private Site site = Site.me()
-        .setRetryTimes(3).setSleepTime(1000).setUseGzip(true);
+        .setRetryTimes(10).setSleepTime(2000).setUseGzip(true);
 
     @Override
     public void process(Page page) {

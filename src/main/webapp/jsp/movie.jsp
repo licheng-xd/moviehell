@@ -68,7 +68,7 @@
     <br/><br/>
     <div id="download" style="font-size: 12px; display: block;">
       <%
-        JSONArray hrefs = JSONArray.parseArray((String)request.getAttribute("hrefs"));
+        JSONArray hrefs = JSONArray.parseArray((String)request.getAttribute("href"));
         Iterator<Object> iter = hrefs.iterator();
         while (iter.hasNext()) {
           String name = (String) iter.next();
