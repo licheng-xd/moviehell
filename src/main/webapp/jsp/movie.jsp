@@ -1,3 +1,5 @@
+<%@ page import="com.alibaba.fastjson.JSONArray" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -43,7 +45,7 @@
     <nav>
       <ul class="nav nav-pills pull-right">
         <li role="presentation"><a href="/index.html">电影</a></li>
-        <li role="presentation"><a href="/p1080.html">1080P</a></li>
+        <%--<li role="presentation"><a href="/p1080.html">1080P</a></li>--%>
         <li role="presentation"><a href="/ustv.html">美剧</a></li>
         <li role="presentation"><a href="/documentary.html">纪录片</a></li>
         <li role="presentation"><a href="/about.html">关于</a></li>
@@ -65,8 +67,18 @@
     </button>
     <br/><br/>
     <div id="download" style="font-size: 12px; display: block;">
-      <a><%=request.getAttribute("href")%></a><br/>
-      <br/><label>注：将上面的链接复制到迅雷中进行下载。</label>
+      <%
+        JSONArray hrefs = JSONArray.parseArray((String)request.getAttribute("hrefs"));
+        Iterator<Object> iter = hrefs.iterator();
+        while (iter.hasNext()) {
+          String name = (String) iter.next();
+          String href = (String) iter.next();
+      %>
+      <a href="<%=href%>"><%=name%></a><br/>
+      <%
+        }
+      %>
+      <br><label>注：右键复制链接地址到迅雷中进行下载。</label>
     </div>
   </div>
 

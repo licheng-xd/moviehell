@@ -2,6 +2,7 @@ package com.lc.moviehell.service.impl;
 
 import com.lc.moviehell.dao.MovieMapper;
 import com.lc.moviehell.dao.domain.Movie;
+import com.lc.moviehell.service.IMovieService;
 import com.lc.moviehell.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by lc on 15/8/21.
  */
 @Service("movieService")
-public class MovieServiceImpl {
+public class MovieServiceImpl implements IMovieService {
     private static final Logger logger = LoggerFactory.getLogger(
         MovieServiceImpl.class);
 

@@ -1,7 +1,7 @@
 package com.lc.moviehell.spider;
 
 import com.lc.moviehell.dao.domain.Movie;
-import com.lc.moviehell.service.impl.MovieServiceImpl;
+import com.lc.moviehell.service.IMovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.ResultItems;
@@ -15,19 +15,23 @@ public class MoviePipeline implements Pipeline {
     private static final Logger logger = LoggerFactory.getLogger(
         MoviePipeline.class);
 
-    private MovieServiceImpl movieService;
+    private IMovieService movieService;
 
-    public MoviePipeline(MovieServiceImpl movieService) {
+    public MoviePipeline(IMovieService movieService) {
         this.movieService = movieService;
     }
 
-    @Override public void process(ResultItems result, Task task) {
+    @Override
+    public void process(ResultItems result, Task task) {
         String name = result.get("name");
         String img = result.get("img");
-        String href = result.get("href");
-        String introduce = result.get("introduce");
+        String hrefs = result.get("hrefs");
+        String intro = result.get("intro");
         String url = result.get("url");
-        if (name == null || img == null || href == null || introduce == null || url == null) {
+        if (img == null) {
+            img = "http://nos-yx.netease.com/yixinpublic/moviehell-404.jpg";
+        }
+        if (name == null || hrefs == null || intro == null || url == null) {
             logger.warn("invalid result: {}", result);
         } else {
             url = url.substring(0, url.length() - 5);
@@ -38,8 +42,8 @@ public class MoviePipeline implements Pipeline {
             movie.setId(id);
             movie.setName(name);
             movie.setImg(img);
-            movie.setHref(href);
-            movie.setIntro(introduce);
+            movie.setHref(hrefs);
+            movie.setIntro(intro);
             movie.setTime(time);
             movie.setCreatetime(System.currentTimeMillis());
             if (!movieService.hasMovie(id)) {

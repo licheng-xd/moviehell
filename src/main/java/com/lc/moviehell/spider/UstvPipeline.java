@@ -9,6 +9,8 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +21,8 @@ public class UstvPipeline implements Pipeline {
 
     private IUstvService ustvService;
 
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
     public UstvPipeline(IUstvService ustvService) {
         this.ustvService = ustvService;
     }
@@ -27,26 +31,20 @@ public class UstvPipeline implements Pipeline {
         String name = result.get("name");
         String img = result.get("img");
         List<String> hrefs = result.get("hrefs");
-        String introduce = result.get("introduce");
+        String intro = result.get("intro");
         String url = result.get("url");
-        String time = result.get("time");
         if (img == null) {
             img = "http://nos-yx.netease.com/yixinpublic/moviehell-404.jpg";
         }
-        if (name == null || hrefs == null || introduce == null || url == null) {
+        if (name == null || hrefs == null || intro == null || url == null) {
             logger.warn("invalid result: {}", result);
         } else {
-            if (!url.contains("/tv/oumeitv")) {
-                return;
-            }
-            if (introduce.contains("下载地址")) {
-                introduce = introduce.substring(0, introduce.indexOf("下载地址") - 2);
-            }
             url = url.substring(0, url.length() - 5);
             String[] tmp = url.split("/");
             long id = Long.parseLong(tmp[tmp.length - 1]);
             Ustv ustv = ustvService.getUstvById(id);
             long now = System.currentTimeMillis();
+            String time = format.format(new Date());
             if (ustv == null) {
                 // 创建
                 ustv = new Ustv();
@@ -55,7 +53,7 @@ public class UstvPipeline implements Pipeline {
                 ustv.setImg(img);
                 ustv.setHrefs(JSON.toJSONString(hrefs));
                 ustv.setSize(hrefs.size());
-                ustv.setIntro(introduce);
+                ustv.setIntro(intro);
                 ustv.setTime(time);
                 ustv.setUpdatetime(now);
                 ustv.setCreatetime(now);

@@ -1,6 +1,6 @@
 package com.lc.moviehell.spider;
 
-import com.lc.moviehell.service.impl.MovieServiceImpl;
+import com.lc.moviehell.service.IMovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,20 +18,16 @@ public class MovieTask {
         MovieTask.class);
 
     @Resource
-    private MovieServiceImpl movieService;
+    private IMovieService movieService;
 
-    @Scheduled(cron = "0 0/20 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void run() {
         logger.info("start movie spider ...");
-        Spider.create(new MovieSpider(movieService))
-            .addUrl("http://dytt8.net/")
+        Spider.create(new MovieSpider())
+            .addUrl("http://www.6vhao.com/dy/index.html")
             .addPipeline(new MoviePipeline(movieService))
             .thread(1)
             .run();
-    }
-
-    public static void main(String[] args) {
-        new MovieTask().run();
     }
 
 }

@@ -3,6 +3,7 @@ package com.lc.moviehell.spider;
 import com.lc.moviehell.service.IDocumentaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
@@ -18,7 +19,7 @@ public class DocumentaryInitTask {
     @Resource
     private IDocumentaryService documentaryService;
 
-//    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 5000)
     public void run() {
         logger.info("start DocumentaryInitTask ...");
         Spider.create(new DocumentarySpider())

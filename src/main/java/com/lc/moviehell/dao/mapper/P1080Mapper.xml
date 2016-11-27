@@ -13,7 +13,7 @@
     </select>
 
     <select id="getP1080sByOffset" parameterType="java.lang.Integer" resultMap="p1080Map">
-        select * from p1080_detail order by time desc limit 20 offset #{offset};
+        select * from p1080_detail order by time desc, updatetime desc limit 20 offset #{offset};
     </select>
 
     <select id="getP1080Count" resultType="java.lang.Integer">
@@ -21,7 +21,7 @@
     </select>
 
     <select id="searchP1080" resultMap="p1080Map">
-        select * from p1080_detail where name like #{key} order by time desc;
+        select * from p1080_detail where name like #{key} order by time desc, updatetime desc;
     </select>
 
 </mapper>

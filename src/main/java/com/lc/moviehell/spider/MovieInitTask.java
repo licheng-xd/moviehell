@@ -1,9 +1,10 @@
 package com.lc.moviehell.spider;
 
-import com.lc.moviehell.service.IP1080Service;
+import com.lc.moviehell.service.IMovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
@@ -11,23 +12,23 @@ import javax.annotation.Resource;
 /**
  * Created by lc on 16/9/6.
  */
-//@Service
-public class P1080InitTask {
+@Service
+public class MovieInitTask {
 
     private static final Logger logger = LoggerFactory.getLogger(
-        P1080InitTask.class);
+        MovieInitTask.class);
 
     @Resource
-    private IP1080Service p1080Service;
+    private IMovieService movieService;
 
     @Scheduled(fixedDelay = 5000)
     public void run() {
-        logger.info("start P1080InitTask ...");
+        logger.info("start MovieInitTask ...");
 
-        for (int i=121; i>1; i--) {
-            Spider.create(new P1080Spider())
-                .addUrl("http://www.mp4ba.com/index.php?page=" + i)
-                .addPipeline(new P1080Pipeline(p1080Service))
+        for (int i=160; i>1; i--) {
+            Spider.create(new MovieSpider())
+                .addUrl("http://www.6vhao.com/dy/index_" + i + ".html")
+                .addPipeline(new MoviePipeline(movieService))
                 .thread(1)
                 .run();
             try {
@@ -36,6 +37,8 @@ public class P1080InitTask {
                 logger.error(e.getMessage(), e);
             }
         }
+
+
     }
 
 }

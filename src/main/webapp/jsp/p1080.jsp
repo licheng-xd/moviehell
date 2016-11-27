@@ -66,8 +66,8 @@
     </button>
     <br/><br/>
     <div id="p1080_download" style="font-size: 12px; display: block;">
-      <a><%=request.getAttribute("href")%></a><br/>
-      <br/><label>注：将上面的链接复制到浏览器中下载种子文件。</label>
+      <a href="<%=request.getAttribute("href")%>"><%=request.getAttribute("href")%></a><br/>
+      <%--<br/><label>注：将上面的链接复制到浏览器中下载种子文件。</label>--%>
     </div>
   </div>
 

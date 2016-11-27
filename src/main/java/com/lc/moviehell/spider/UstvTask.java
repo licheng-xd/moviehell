@@ -20,17 +20,14 @@ public class UstvTask {
     @Resource
     private UstvServiceImpl ustvService;
 
-    @Scheduled(cron = "0 0/20 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void run() {
         logger.info("start ustv spider ...");
         Spider.create(new UstvSpider())
-            .addUrl("http://www.ygdy8.net/")
+            .addUrl("http://www.6vhao.com/mj/index.html")
             .addPipeline(new UstvPipeline(ustvService))
             .thread(1)
             .run();
     }
 
-    public static void main(String[] args) {
-        new UstvTask().run();
-    }
 }

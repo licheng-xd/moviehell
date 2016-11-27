@@ -3,6 +3,8 @@ package com.lc.moviehell.spider;
 import com.lc.moviehell.service.IUstvService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
@@ -12,7 +14,7 @@ import javax.annotation.Resource;
  *
  * Created by lc on 15/8/24.
  */
-//@Service
+@Service
 public class UstvInitTask {
     private static final Logger logger = LoggerFactory.getLogger(
         UstvInitTask.class);
@@ -20,28 +22,16 @@ public class UstvInitTask {
     @Resource
     private IUstvService ustvService;
 
-//    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 5000)
     public void run() {
         logger.info("start UstvInitTask ...");
-        for (int i=1; i<23; i++) {
-            Spider.create(new UstvInitSpider())
-                .addUrl("http://www.ygdy8.net/html/tv/oumeitv/list_9_" + i + ".html")
+        for (int i=44; i>1; i--) {
+            Spider.create(new UstvSpider())
+                .addUrl("http://www.6vhao.com/mj/index_" + i + ".html")
                 .addPipeline(new UstvPipeline(ustvService))
                 .thread(1)
                 .run();
         }
     }
 
-    public void test() {
-        logger.info("start UstvInitTask test ...");
-        Spider.create(new UstvSpider())
-            .addUrl("http://dytt8.net/html/tv/oumeitv/20150922/49088.html")
-            .addPipeline(new UstvPipeline(ustvService))
-            .thread(1)
-            .run();
-    }
-
-    public static void main(String[] args) {
-        new UstvInitTask().test();
-    }
 }
