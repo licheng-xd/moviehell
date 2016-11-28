@@ -10,7 +10,7 @@ import com.lc.moviehell.bean.SerializableBean;
  * Created by lc on 15/8/19.
  */
 public class Movie extends SerializableBean {
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -24,11 +24,11 @@ public class Movie extends SerializableBean {
 
     private long createtime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

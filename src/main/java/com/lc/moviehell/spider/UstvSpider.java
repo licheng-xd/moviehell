@@ -29,6 +29,7 @@ public class UstvSpider implements PageProcessor {
     @Override
     public void process(Page page) {
         try {
+            logger.info("ustv spider for {}", page.getUrl().get());
             Html html = page.getHtml();
             String name = html.xpath("//div[@id='main']/div[@class='col6']/div[@class=box]/h1/text()").get();
             String img = html.xpath("//div[@id='main']/div[@class='col6']/div[@class=box]/div[@id='endText']/p/img/@src").get();
@@ -49,12 +50,10 @@ public class UstvSpider implements PageProcessor {
             if (name == null || array.size() == 0) {
                 page.setSkip(true);
                 List<String> urls = page.getHtml().xpath("//ul[@class='list']/li/a/@href").all();
-                System.out.println(urls.toString());
                 page.addTargetRequests(urls);
                 return;
             }
 
-            String hrefs = array.toJSONString();
             List<String> intros = html.xpath("//div[@id='main']/div[@class='col6']/div[@class=box]/div[@id='endText']/p").all();
             StringBuilder sb = new StringBuilder();
             for (String intro : intros) {
@@ -65,10 +64,10 @@ public class UstvSpider implements PageProcessor {
             }
             String intro = sb.toString().trim();
 
-            page.putField("url", page.getUrl());
+            page.putField("url", page.getUrl().get());
             page.putField("name", name);
             page.putField("img", img);
-            page.putField("hrefs", hrefs);
+            page.putField("hrefs", array);
             page.putField("intro", intro);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

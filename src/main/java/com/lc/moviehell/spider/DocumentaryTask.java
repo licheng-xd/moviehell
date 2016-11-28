@@ -21,7 +21,7 @@ public class DocumentaryTask {
 
     @Scheduled(cron = "0 0 * * * ?")
     public void run() {
-        logger.info("start DocumentaryInitTask ...");
+        logger.info("start DocumentaryTask ...");
         Spider.create(new DocumentarySpider())
             .addUrl("http://www.6vhao.net/jlp/index.html")
             .addPipeline(new DocumentaryPipeline(documentaryService))

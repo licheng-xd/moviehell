@@ -71,7 +71,7 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/movie/{id}")
-    public String viewMoive(HttpServletRequest request, @PathVariable int id) {
+    public String viewMoive(HttpServletRequest request, @PathVariable String id) {
         logger.debug("viewMovie id:{}", id);
         Movie movie = movieService.getMovieById(id);
         if (movie == null) {

@@ -10,11 +10,11 @@ import java.util.List;
 public interface IMovieService {
     int insertMovie(Movie movie);
 
-    Movie getMovieById(long id);
+    Movie getMovieById(String id);
 
     List<Movie> getMoviesByOffset(int offset);
 
-    boolean hasMovie(long id);
+    boolean hasMovie(String id);
 
     int getMovieCount();
 

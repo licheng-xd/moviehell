@@ -22,7 +22,7 @@
         where id = #{id};
     </update>
 
-    <select id="getUstvById" parameterType="java.lang.Long" resultType="com.lc.moviehell.dao.domain.Ustv">
+    <select id="getUstvById" parameterType="java.lang.String" resultType="com.lc.moviehell.dao.domain.Ustv">
         select * from ustv_detail where id=#{id};
     </select>
 

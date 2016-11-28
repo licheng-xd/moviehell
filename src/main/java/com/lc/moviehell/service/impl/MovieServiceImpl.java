@@ -34,7 +34,7 @@ public class MovieServiceImpl implements IMovieService {
         }
     }
 
-    public Movie getMovieById(long id) {
+    public Movie getMovieById(String id) {
         try {
             return mapper.getMovieById(id);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class MovieServiceImpl implements IMovieService {
         }
     }
 
-    public boolean hasMovie(long id) {
+    public boolean hasMovie(String id) {
         return getMovieById(id) != null;
     }
 

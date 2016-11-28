@@ -30,7 +30,7 @@ public class UstvServiceImpl implements IUstvService {
         }
     }
 
-    @Override public Ustv getUstvById(long id) {
+    @Override public Ustv getUstvById(String id) {
         try {
             return mapper.getUstvById(id);
         } catch (Exception e) {

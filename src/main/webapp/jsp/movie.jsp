@@ -57,7 +57,7 @@
   <div class="jumbotron">
     <h3 class="title"><%=request.getAttribute("title")%></h3>
     <div class="imagediv"><img class="image" src="<%=request.getAttribute("img")%>"/></div>
-    <a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣电影</a>
+    <a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣</a><br/>
     <p class="intro"><%=request.getAttribute("intro").toString().replace("\r\n",
             "<br/>")%></p>
 

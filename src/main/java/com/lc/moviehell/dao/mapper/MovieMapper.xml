@@ -8,12 +8,12 @@
         values (#{id}, #{name}, #{img}, #{intro}, #{href}, #{time}, #{createtime});
     </insert>
 
-    <select id="getMovieById" parameterType="java.lang.Long" resultType="com.lc.moviehell.dao.domain.Movie">
+    <select id="getMovieById" parameterType="java.lang.String" resultType="com.lc.moviehell.dao.domain.Movie">
         select * from movie_detail where id=#{id};
     </select>
 
     <select id="getMoviesByOffset" parameterType="java.lang.Integer" resultMap="movieMap">
-        select * from movie_detail order by id desc limit 20 offset #{offset};
+        select * from movie_detail order by time desc limit 20 offset #{offset};
     </select>
 
     <select id="getMovieCount" resultType="java.lang.Integer">

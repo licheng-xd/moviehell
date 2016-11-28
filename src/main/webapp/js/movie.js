@@ -39,7 +39,7 @@ function gotoPage(offset) {
                 var movies = resp["obj"];
                 for (var idx in movies) {
                     var movie = eval("(" + movies[idx] + ")");
-                    list.innerHTML += "<a class=\"list-group-item cursor\" onclick=\"get_movie(" + movie["id"] + ")\">" + movie["name"] + "<label style=\"float:right;font-weight:normal;\">" + movie["time"] + "</label></a>";
+                    list.innerHTML += "<a class=\"list-group-item cursor\" onclick=\"get_movie('" + movie["id"] + "')\">" + movie["name"] + "<label style=\"float:right;font-weight:normal;\">" + movie["time"] + "</label></a>";
                 }
             } else {
                 list.innerHTML += "<a class=\"list-group-item\">暂无数据</a>";
@@ -90,7 +90,7 @@ function gotoUstvPage(offset) {
                 var tvs = resp["obj"];
                 for (var idx in tvs) {
                     var tv = eval("(" + tvs[idx] + ")");
-                    list.innerHTML += "<a class=\"list-group-item cursor\" onclick=\"get_ustv(" + tv["id"] + ")\">" + tv["name"] + "<label style=\"float:right;font-weight:normal;\">" + tv["time"] + "</label></a>";
+                    list.innerHTML += "<a class=\"list-group-item cursor\" onclick=\"get_ustv('" + tv["id"] + "')\">" + tv["name"] + "<label style=\"float:right;font-weight:normal;\">" + tv["time"] + "</label></a>";
                 }
             } else {
                 list.innerHTML += "<a class=\"list-group-item\">暂无数据</a>";

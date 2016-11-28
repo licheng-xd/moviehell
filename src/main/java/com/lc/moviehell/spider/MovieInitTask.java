@@ -4,7 +4,6 @@ import com.lc.moviehell.service.IMovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
@@ -12,7 +11,7 @@ import javax.annotation.Resource;
 /**
  * Created by lc on 16/9/6.
  */
-@Service
+//@Service
 public class MovieInitTask {
 
     private static final Logger logger = LoggerFactory.getLogger(

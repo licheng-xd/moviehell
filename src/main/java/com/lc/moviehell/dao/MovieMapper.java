@@ -10,7 +10,7 @@ import java.util.List;
 public interface MovieMapper {
     int insertMovie(Movie movie);
 
-    Movie getMovieById(long id);
+    Movie getMovieById(String id);
 
     List<Movie> getMoviesByOffset(int offset);
 

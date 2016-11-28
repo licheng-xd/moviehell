@@ -20,9 +20,9 @@ public class MovieTask {
     @Resource
     private IMovieService movieService;
 
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 0/20 * * * ?")
     public void run() {
-        logger.info("start movie spider ...");
+        logger.info("start MovieTask ...");
         Spider.create(new MovieSpider())
             .addUrl("http://www.6vhao.com/dy/index.html")
             .addPipeline(new MoviePipeline(movieService))

@@ -53,7 +53,7 @@ public class UstvController {
     }
 
     @RequestMapping(value = "/view/{id}")
-    public String viewUstv(HttpServletRequest request, @PathVariable int id) {
+    public String viewUstv(HttpServletRequest request, @PathVariable String id) {
         logger.debug("viewUstv id:{}", id);
         Ustv tv = ustvService.getUstvById(id);
         if (tv == null) {

@@ -28,52 +28,58 @@ public class UstvPipeline implements Pipeline {
     }
 
     @Override public void process(ResultItems result, Task task) {
-        String name = result.get("name");
-        String img = result.get("img");
-        List<String> hrefs = result.get("hrefs");
-        String intro = result.get("intro");
-        String url = result.get("url");
-        if (img == null) {
-            img = "http://nos-yx.netease.com/yixinpublic/moviehell-404.jpg";
-        }
-        if (name == null || hrefs == null || intro == null || url == null) {
-            logger.warn("invalid result: {}", result);
-        } else {
-            url = url.substring(0, url.length() - 5);
-            String[] tmp = url.split("/");
-            long id = Long.parseLong(tmp[tmp.length - 1]);
-            Ustv ustv = ustvService.getUstvById(id);
-            long now = System.currentTimeMillis();
-            String time = format.format(new Date());
-            if (ustv == null) {
-                // 创建
-                ustv = new Ustv();
-                ustv.setId(id);
-                ustv.setName(name);
-                ustv.setImg(img);
-                ustv.setHrefs(JSON.toJSONString(hrefs));
-                ustv.setSize(hrefs.size());
-                ustv.setIntro(intro);
-                ustv.setTime(time);
-                ustv.setUpdatetime(now);
-                ustv.setCreatetime(now);
-                ustvService.insertUstv(ustv);
-                logger.info("create new ustv {}, {}", id, name);
+        try {
+            String name = result.get("name");
+            String img = result.get("img");
+            List<String> hrefs = result.get("hrefs");
+            String intro = result.get("intro");
+            String url = result.get("url");
+            if (img == null) {
+                img = "http://nos-yx.netease.com/yixinpublic/moviehell-404.jpg";
+            }
+            if (name == null || hrefs == null || intro == null || url == null) {
+                logger.warn("invalid result: {}", result);
             } else {
-                // 更新
-                if (ustv.getSize() < hrefs.size()) {
-                    ustv.setHrefs(JSON.toJSONString(hrefs));
+                url = url.substring(0, url.length() - 5);
+                String[] tmp = url.split("/");
+                String id = tmp[tmp.length - 1];
+                Ustv ustv = ustvService.getUstvById(id);
+                long now = System.currentTimeMillis();
+                if (ustv == null) {
+                    // 创建
+                    String time = tmp[tmp.length - 2];
+                    ustv = new Ustv();
+                    ustv.setId(id);
                     ustv.setName(name);
+                    ustv.setImg(img);
+                    ustv.setHrefs(JSON.toJSONString(hrefs));
                     ustv.setSize(hrefs.size());
+                    ustv.setIntro(intro);
                     ustv.setTime(time);
                     ustv.setUpdatetime(now);
-                    ustvService.updateUstv(ustv);
-                    logger.info("update ustv {}, {}", id, name);
-                }
-                else {
-                    logger.warn("ustv size not modify id:{} oldsize:{} newsize:{}", id, ustv.getSize(), hrefs.size());
+                    ustv.setCreatetime(now);
+                    ustvService.insertUstv(ustv);
+                    logger.info("create new ustv {}, {}", id, name);
+                } else {
+                    // 更新
+                    String time = format.format(new Date());
+                    if (ustv.getSize() < hrefs.size()) {
+                        ustv.setHrefs(JSON.toJSONString(hrefs));
+                        ustv.setName(name);
+                        ustv.setSize(hrefs.size());
+                        ustv.setTime(time);
+                        ustv.setUpdatetime(now);
+                        ustvService.updateUstv(ustv);
+                        logger.info("update ustv {}, {}", id, name);
+                    } else {
+                        logger.warn(
+                            "ustv size not modify id:{} oldsize:{} newsize:{}",
+                            id, ustv.getSize(), hrefs.size());
+                    }
                 }
             }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
         }
     }
 }

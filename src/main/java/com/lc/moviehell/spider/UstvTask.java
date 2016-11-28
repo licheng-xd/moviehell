@@ -22,7 +22,7 @@ public class UstvTask {
 
     @Scheduled(cron = "0 0/30 * * * ?")
     public void run() {
-        logger.info("start ustv spider ...");
+        logger.info("start UstvTask ...");
         Spider.create(new UstvSpider())
             .addUrl("http://www.6vhao.com/mj/index.html")
             .addPipeline(new UstvPipeline(ustvService))

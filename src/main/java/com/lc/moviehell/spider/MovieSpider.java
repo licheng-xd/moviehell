@@ -1,14 +1,11 @@
 package com.lc.moviehell.spider;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lc.moviehell.service.IMovieService;
-import com.lc.moviehell.service.impl.MovieServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
@@ -32,6 +29,7 @@ public class MovieSpider implements PageProcessor {
     @Override
     public void process(Page page) {
         try {
+            logger.info("movie spider for {}", page.getUrl().get());
             Html html = page.getHtml();
             String name = html.xpath("//div[@id='main']/div[@class='col6']/div[@class=box]/h1/text()").get();
             String img = html.xpath("//div[@id='main']/div[@class='col6']/div[@class=box]/div[@id='endText']/p/img/@src").get();
@@ -52,7 +50,7 @@ public class MovieSpider implements PageProcessor {
             if (name == null || array.size() == 0) {
                 page.setSkip(true);
                 List<String> urls = page.getHtml().xpath("//ul[@class='list']/li/a/@href").all();
-                System.out.println(urls.toString());
+//                System.out.println(urls.toString());
                 page.addTargetRequests(urls);
                 return;
             }
@@ -68,7 +66,7 @@ public class MovieSpider implements PageProcessor {
             }
             String intro = sb.toString().trim();
 
-            page.putField("url", page.getUrl());
+            page.putField("url", page.getUrl().get());
             page.putField("name", name);
             page.putField("img", img);
             page.putField("hrefs", hrefs);
@@ -83,12 +81,4 @@ public class MovieSpider implements PageProcessor {
         return site;
     }
 
-    public static void main(String[] args) {
-        IMovieService movieService = new MovieServiceImpl();
-        Spider.create(new MovieSpider())
-            .addUrl("http://www.6vhao.com/dy/2016-11-26/YJMDL.html")
-            .addPipeline(new MoviePipeline(movieService))
-            .thread(1)
-            .run();
-    }
 }

@@ -4,7 +4,6 @@ import com.lc.moviehell.service.IUstvService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
 
 import javax.annotation.Resource;
@@ -14,7 +13,7 @@ import javax.annotation.Resource;
  *
  * Created by lc on 15/8/24.
  */
-@Service
+//@Service
 public class UstvInitTask {
     private static final Logger logger = LoggerFactory.getLogger(
         UstvInitTask.class);

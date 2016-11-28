@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.alibaba.fastjson.JSONArray" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -56,7 +57,7 @@
   <div class="jumbotron">
     <h3 class="title"><%=request.getAttribute("title")%></h3>
     <div class="imagediv"><img class="image" src="<%=request.getAttribute("img")%>"/></div>
-    <a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣电影</a>
+    <a class="intro" target="_blank" href="http://movie.douban.com/subject_search?search_text=<%=request.getAttribute("name")%>">豆瓣</a><br/>
     <p class="intro"><%=request.getAttribute("intro").toString().replace("\r\n",
             "<br/>")%></p>
 
@@ -67,11 +68,13 @@
     <br/><br/>
     <div id="ustv_download" style="font-size: 12px; display: block;">
       <%
-        JSONArray hrefs = (JSONArray) request.getAttribute("hrefs");
-        for (Object href1 : hrefs) {
-          String href = (String) href1;
+        JSONArray hrefs = (JSONArray)request.getAttribute("hrefs");
+        Iterator<Object> iter = hrefs.iterator();
+        while (iter.hasNext()) {
+          String name = (String) iter.next();
+          String href = (String) iter.next();
       %>
-      <a><%=href%></a><br/>
+      <a href="<%=href%>"><%=name%></a><br/>
       <%
         }
       %>

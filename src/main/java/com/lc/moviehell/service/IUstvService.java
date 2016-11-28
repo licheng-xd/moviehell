@@ -11,7 +11,7 @@ public interface IUstvService {
 
     public int insertUstv(Ustv ustv);
 
-    public Ustv getUstvById(long id);
+    public Ustv getUstvById(String id);
 
     public List<Ustv> getUstvByOffset(int offset);
 
