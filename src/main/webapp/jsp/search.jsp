@@ -87,7 +87,7 @@
       } else {
         for (Movie m : movies) {
     %>
-          <a class="list-group-item cursor" onclick="get_movie(<%=m.getId()%>)">[电影] &nbsp;&nbsp;<%=m.getName()%><label style="float:right;font-weight:normal;"><%=m.getTime()%></label></a>
+          <a class="list-group-item cursor" onclick="get_movie('<%=m.getId()%>')">[电影] &nbsp;&nbsp;<%=m.getName()%><label style="float:right;font-weight:normal;"><%=m.getTime()%></label></a>
     <%
         }
         for (P1080 p1080 : p1080s) {
@@ -97,12 +97,12 @@
         }
         for (Ustv tv : ustvs) {
     %>
-          <a class="list-group-item cursor" onclick="get_ustv(<%=tv.getId()%>)">[美剧] &nbsp;&nbsp;<%=tv.getName()%><label style="float:right;font-weight:normal;"><%=tv.getTime()%></label></a>
+          <a class="list-group-item cursor" onclick="get_ustv('<%=tv.getId()%>')">[美剧] &nbsp;&nbsp;<%=tv.getName()%><label style="float:right;font-weight:normal;"><%=tv.getTime()%></label></a>
     <%
         }
         for (Documentary docu : docs) {
     %>
-          <a class="list-group-item cursor" onclick="get_documentary(<%=docu.getId()%>)">[纪录片] &nbsp;&nbsp;<%=docu.getName()%><label style="float:right;font-weight:normal;"><%=docu.getTime()%></label></a>
+          <a class="list-group-item cursor" onclick="get_documentary('<%=docu.getId()%>')">[纪录片] &nbsp;&nbsp;<%=docu.getName()%><label style="float:right;font-weight:normal;"><%=docu.getTime()%></label></a>
     <%
         }
       }
